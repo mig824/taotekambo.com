@@ -1,13 +1,14 @@
 import React from 'react';
 
-const Post = ({ post }: any) => {
+const Post = ({ post: { title, author, published_at, body } }: any) => {
   return (
-    <div>
-      <h3>{post.title}</h3>
-      <p>{post.author}</p>
-      <p>Published on: {post.published_at}</p>
-      <p>{post.body}</p>
-    </div>
+    <section>
+      <h3>{title}</h3>
+      <h6>
+        Published by {author}, on {published_at}
+      </h6>
+      <p>{body}</p>
+    </section>
   );
 };
 

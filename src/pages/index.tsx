@@ -1,18 +1,18 @@
+/**@jsx jsx */
 import React from 'react';
+import { jsx, css } from '@emotion/react';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import Image from '../components/Image';
-import { ImgContainer } from '../utils/styles/components';
+import Banner from '../components/images/Banner';
+import Carousel from '../components/Carousel';
 
 const IndexPage = () => (
   <Layout>
     <SEO title="Home" />
-    <ImgContainer>
-      <img src="https://images.unsplash.com/photo-1588392382834-a891154bca4d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1355&q=80" />
-    </ImgContainer>
+    <Banner />
     <section>
-      <h1>The Story of Kambo</h1>
+      <h2>The Story of Kambo</h2>
       <p>
         The legend of the Kaxinawá says that deep in the jungle a tribe fell
         ill. The local medicine man named Kampu tried to heal the village with
@@ -28,7 +28,7 @@ const IndexPage = () => (
       </p>
     </section>
     <section>
-      <h1>Benefits from Kambo</h1>
+      <h2>Benefits from Kambo</h2>
       <p>
         Kambo enters through the lymphatic system and awakens the body's self
         healing abilities. It has been know to help with Anxiety, Depression,
@@ -37,7 +37,18 @@ const IndexPage = () => (
         Cancer, Fertility and so much more.
       </p>
     </section>
+    <Carousel />
   </Layout>
 );
+
+// const homePageCSS = css`
+//   section {
+//     display: flex;
+//     max-height: 3.3rem;
+//     padding-top: 1rem;
+//     width: 100%;
+//     margin-bottom: 1rem;
+//   }
+// `;
 
 export default IndexPage;

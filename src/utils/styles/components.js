@@ -1,5 +1,12 @@
 import styled from '@emotion/styled';
 
+import {
+  primaryColor,
+  secondaryColor,
+  primaryColorHover,
+  secondaryColorHover,
+} from './colorscheme';
+
 export const MainContainerCSS = styled.main`
   margin: auto;
   max-width: 100%;
@@ -8,6 +15,28 @@ export const MainContainerCSS = styled.main`
 `;
 
 export const SectionCSS = styled.section``;
+
+export const PrimaryBtn = styled.button`
+  border-radius: 5px;
+  border: transparent 1px solid;
+  background-color: ${primaryColor};
+  color: ${secondaryColor};
+  padding: 0.2rem 0.65rem;
+
+  &:hover {
+    background-color: ${primaryColorHover};
+    color: ${secondaryColorHover};
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:active {
+    border: solid 1px ${secondaryColor};
+  }
+`;
 
 export const ImgContainer = styled.div`
   min-width: 100%;
@@ -19,6 +48,7 @@ export const ImgContainer = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
+
   &::after {
     background-size: cover;
     transform: translateZ(-1px) scale(1.8);

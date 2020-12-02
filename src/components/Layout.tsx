@@ -12,7 +12,7 @@ import { Global as GlobalCSS } from '@emotion/react';
 
 import NavBar from './NavBar';
 import Footer from './Footer';
-import globalCSS from '../utils/styles/global.css';
+import globalCSS from '../utils/styles/global-css';
 
 const Layout = ({ children }: any) => {
   const data = useStaticQuery(graphql`
@@ -28,7 +28,7 @@ const Layout = ({ children }: any) => {
   return (
     <>
       <GlobalCSS styles={globalCSS} />
-      <NavBar siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <NavBar siteTitle={data?.site?.siteMetadata?.title || `Title`} />
       <main>{children}</main>
       <Footer />
     </>

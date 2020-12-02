@@ -1,12 +1,17 @@
 import Typography from 'typography';
-import deYoungTheme from 'typography-theme-de-young';
+import stAnnesTheme from 'typography-theme-st-annes';
 
-// deYoungTheme.overrideThemeStyles = () => ({
-//   'a:hover,a:active': {
+// stAnnesTheme.overrideThemeStyles = ({ rhythm }) => ({
+//   // 'a:hover': {
+//   //   boxShadow: 'none',
+//   // },
+
+//   'a:active': {
+//     fontSize: rhythm(2 / 3),
 //     boxShadow: 'none',
 //   },
 // });
 
-const typography = new Typography(deYoungTheme);
+const typography = new Typography(stAnnesTheme);
 
 export default typography;

@@ -1,6 +1,6 @@
 import { css } from '@emotion/react';
 
-import { primaryColor, secondaryColor, mainTextColor } from './colorscheme';
+import { secondaryColor, mainTextColor, backgroundColor } from './colorscheme';
 
 const globalCSS = css`
   html,
@@ -8,7 +8,7 @@ const globalCSS = css`
     box-sizing: border-box;
     margin: 0px;
     padding: 0px;
-    background-color: #2f4f4f;
+    background-color: ${backgroundColor};
     height: 100%;
   }
 
@@ -19,22 +19,13 @@ const globalCSS = css`
   }
 
   main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: auto;
     max-width: 100%;
     min-height: 100%;
-    padding: 0 1.0875rem 1.45rem;
-    perspective: 5px;
     overflow-x: hidden;
-  }
-
-  nav {
-    display: flex;
-    background: ${primaryColor};
-    /* flex: 2 1 auto; */
-    max-height: 3.3rem;
-    width: 100%;
-    border: green 1px solid;
-    justify-content: space-between;
   }
 
   section {
@@ -42,13 +33,14 @@ const globalCSS = css`
     flex-direction: column;
     align-items: center;
     width: 70%;
-    margin: auto;
-    position: relative;
-    z-index: 1;
+    padding: 3rem 1rem;
+    text-align: center;
   }
 
-  h1 {
+  h1,
+  h2 {
     color: ${secondaryColor};
+    margin-bottom: 2rem;
   }
 
   p {
@@ -56,8 +48,7 @@ const globalCSS = css`
   }
 
   footer {
-    position: absolute;
-    margin-top: 2rem;
+    position: fixed;
     bottom: 0;
   }
 `;

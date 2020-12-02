@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "tao-te-kambo",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "A website for Tao Te Kambo",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Miguel Michel",
   "dependencies": {
     "@emotion/core": "^11.0.0",
     "@emotion/react": "^11.0.0",
@@ -20,18 +20,20 @@
     "gatsby-source-strapi": "^0.0.12",
     "gatsby-transformer-sharp": "^2.5.21",
     "prop-types": "^15.7.2",
-    "react": "^16.12.0",
+    "react": "^17.0.1",
     "react-dom": "^16.12.0",
     "react-helmet": "^6.1.0",
-    "react-scroll-parallax": "^2.3.4",
+    "react-icons": "^4.1.0",
     "react-typography": "^0.16.19",
     "typescript": "^4.0.5",
     "typography": "^0.16.19",
-    "typography-theme-de-young": "^0.16.19"
+    "typography-theme-st-annes": "^0.16.19"
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.0",
+    "@types/react-icons": "^3.0.0",
     "@types/typography": "^0.16.3",
+    "dotenv": "^8.2.0",
     "prettier": "2.1.2"
   },
   "keywords": [
