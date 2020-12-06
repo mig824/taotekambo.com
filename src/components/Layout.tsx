@@ -13,6 +13,7 @@ import { Global as GlobalCSS } from '@emotion/react';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import globalCSS from '../utils/styles/global-css';
+import 'aos/dist/aos.css';
 
 const Layout = ({ children }: any) => {
   const data = useStaticQuery(graphql`

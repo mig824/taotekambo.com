@@ -5,16 +5,29 @@ import {
   secondaryColor,
   primaryColorHover,
   secondaryColorHover,
+  backgroundColor,
 } from './colorscheme';
 
-export const MainContainerCSS = styled.main`
-  margin: auto;
-  max-width: 100%;
-  min-height: 100%;
-  padding: 0 1.0875rem 1.45rem;
+export const SectionContainer = styled.section`
+  background-color: ${backgroundColor};
+  width: 100%;
+  padding: 5rem 4rem;
+  text-align: center;
+  z-index: 2;
 `;
 
-export const SectionCSS = styled.section``;
+export const SectionContentWrapper = styled.div`
+  display: grid;
+  grid-template-columns: ${(props) => (props.noCols ? null : '1fr 1fr')};
+
+  h2 {
+    margin: auto;
+  }
+
+  p {
+    margin: auto;
+  }
+`;
 
 export const PrimaryBtn = styled.button`
   border-radius: 5px;
@@ -22,6 +35,7 @@ export const PrimaryBtn = styled.button`
   background-color: ${primaryColor};
   color: ${secondaryColor};
   padding: 0.2rem 0.65rem;
+  margin-top: ${({ marginTop }) => (marginTop ? '2rem' : null)};
 
   &:hover {
     background-color: ${primaryColorHover};
@@ -57,25 +71,6 @@ export const ImgContainer = styled.div`
   }
 `;
 
-export const ParallaxImg = styled.div`
-  position: relative;
-  min-height: 50vh;
-  width: 100%;
-  transform-style: inherit;
-  z-index: -1;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: block;
-    background-size: cover;
-    background: url(https://picsum.photos/g/1921/1081?random) top center;
-    transform: translateZ(-1px) scale(2);
-    min-height: 100%;
-    z-index: -2;
-  }
+export const ContentWrapper = styled.div`
+  display: flex;
 `;

@@ -28,15 +28,6 @@ const globalCSS = css`
     overflow-x: hidden;
   }
 
-  section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 70%;
-    padding: 3rem 1rem;
-    text-align: center;
-  }
-
   h1,
   h2 {
     color: ${secondaryColor};

@@ -17,8 +17,8 @@ const BlogPage = () => {
           author
           body
           created_at
-          published_at(formatString: "MM/DD/YYYY")
           updated_at
+          published_at(formatString: "MM/DD/YYYY")
         }
       }
     }

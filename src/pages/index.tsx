@@ -1,16 +1,40 @@
 /**@jsx jsx */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import { jsx, css } from '@emotion/react';
+import AOS from 'aos';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import Banner from '../components/images/Banner';
-import Carousel from '../components/Carousel';
+import Testimonials from '../components/Testimonials';
+import {
+  PrimaryBtn,
+  SectionContainer,
+  SectionContentWrapper,
+} from '../utils/styles/styled-components';
+import { mainTextColor } from '../utils/styles/colorscheme';
 
 const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query GetTestimonials {
+  const { pageContent, testimonials } = useStaticQuery(graphql`
+    query GetLandingPageData {
+      pageContent: strapiLandingPage {
+        bannerText
+        kamboStory
+        kamboStoryContent
+        kamboBenefits
+        kamboBenefitsContent
+        myStory
+        myStoryContent
+        myStoryImage {
+          childImageSharp {
+            fixed {
+              ...GatsbyImageSharpFixed
+            }
+          }
+        }
+      }
       testimonials: allStrapiTestimonials {
         edges {
           node {
@@ -19,7 +43,7 @@ const IndexPage = () => {
             personDescription
             image {
               childImageSharp {
-                fixed(width: 70, height: 70) {
+                fixed(width: 80, height: 80) {
                   ...GatsbyImageSharpFixed
                 }
               }
@@ -30,37 +54,71 @@ const IndexPage = () => {
     }
   `);
 
+  useEffect(() => {
+    AOS.init({
+      mirror: true,
+      duration: 1500,
+      anchorPlacement: 'center-bottom',
+    });
+  }, []);
+
   return (
     <Layout>
       <SEO title="Home" />
-      <Banner />
-      <section>
-        <h2>The Story of Kambo</h2>
-        <p>
-          The legend of the Kaxinawá says that deep in the jungle a tribe fell
-          ill. The local medicine man named Kampu tried to heal the village with
-          well know plant medicines, though he didn't have any breakthroughs.
-          Kampu went into the jungle to sit in isolation drinking Ayahuasca.
-          This master teacher plant showed him about Kambo medicine, it’s
-          healing properties and how to use it. Kampu then set out into the
-          jungle to find the correct frog, extract then medicine and return to
-          his village. Upon returning he helped heal his entire village with
-          this intelligent sacred medicine. The name Kambo was given to the
-          medicine named after this Shaman that was able to listen to the plants
-          and heal others with the wisdom he received.
-        </p>
-      </section>
-      <section>
-        <h2>Benefits from Kambo</h2>
-        <p>
-          Kambo enters through the lymphatic system and awakens the body's self
-          healing abilities. It has been know to help with Anxiety, Depression,
-          lack of motivation and clarity, Addiction, Candida, Staph Infection,
-          High Blood Pressure, Parkinson's, Auto-immune Disorders, HIV & AID's,
-          Cancer, Fertility and so much more.
-        </p>
-      </section>
-      <Carousel testimonialData={data.testimonials.edges} />
+      <Banner bannerText={pageContent.bannerText} />
+      <SectionContainer>
+        <SectionContentWrapper>
+          <h2
+            data-aos="fade-right"
+            data-aos-delay={1000}
+            data-aos-duration={1500}
+          >
+            {pageContent.kamboStory}
+          </h2>
+          <div
+            data-aos="fade-left"
+            data-aos-delay={1000}
+            data-aos-duration={1500}
+          >
+            <p>{pageContent.kamboStoryContent}</p>
+            <PrimaryBtn marginTop>Learn More</PrimaryBtn>
+          </div>
+        </SectionContentWrapper>
+      </SectionContainer>
+      <SectionContainer>
+        <SectionContentWrapper>
+          <div data-aos="fade-right">
+            <p>{pageContent.kamboBenefitsContent}</p>
+            <PrimaryBtn marginTop>The Science</PrimaryBtn>
+          </div>
+          <h2 data-aos="fade-left">{pageContent.kamboBenefits}</h2>
+        </SectionContentWrapper>
+      </SectionContainer>
+      <SectionContainer>
+        <SectionContentWrapper>
+          <div data-aos="fade-right">
+            <Img fixed={pageContent.myStoryImage.childImageSharp.fixed} />
+          </div>
+          <div data-aos="fade-left">
+            <h2>{pageContent.myStory}</h2>
+            <p>{pageContent.myStoryContent}</p>
+          </div>
+        </SectionContentWrapper>
+      </SectionContainer>
+      <SectionContainer>
+        <SectionContentWrapper>
+          <h2 data-aos="fade-right">Kambo can help if...</h2>
+          <div data-aos="fade-left">
+            <ul style={{ textAlign: 'left', color: mainTextColor }}>
+              <li>You are feeling a lack of clarity</li>
+              <li>You are struggling with food or drug addiction</li>
+              <li>You are experiencing depression, anxiety, or stress</li>
+            </ul>
+          </div>
+        </SectionContentWrapper>
+      </SectionContainer>
+      <h2 data-aos="zoom-in-up">Testimonials</h2>
+      <Testimonials testimonialData={testimonials.edges} />
     </Layout>
   );
 };
@@ -72,6 +130,7 @@ const IndexPage = () => {
 //     padding-top: 1rem;
 //     width: 100%;
 //     margin-bottom: 1rem;
+//     z-index: 4;
 //   }
 // `;
 

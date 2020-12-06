@@ -4,9 +4,9 @@ import { jsx, css } from '@emotion/react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 import Testimonial from './Testimonial';
-import { secondaryColor } from '../utils/styles/colorscheme';
+import { secondaryColor, primaryColor } from '../utils/styles/colorscheme';
 
-const Carousel = ({ testimonialData }) => {
+const Testimonials = ({ testimonialData }) => {
   const containerRef = useRef<HTMLInputElement>(null);
   const [count, setCount] = useState(0);
   const [nextSlide, setNextSlide] = useState(false);
@@ -21,9 +21,10 @@ const Carousel = ({ testimonialData }) => {
     setDimensions(dimensions);
   }, []);
 
-  const carouselCSS = css`
+  const testimonialsCSS = css`
     position: relative;
     width: 100%;
+    background-color: ${primaryColor};
 
     .carousel-container {
       max-width: 60vw;
@@ -91,7 +92,7 @@ const Carousel = ({ testimonialData }) => {
   `;
 
   return (
-    <div css={carouselCSS}>
+    <div css={testimonialsCSS}>
       <button
         className="prev-btn"
         onClick={() => {
@@ -147,4 +148,4 @@ const Carousel = ({ testimonialData }) => {
   );
 };
 
-export default Carousel;
+export default Testimonials;

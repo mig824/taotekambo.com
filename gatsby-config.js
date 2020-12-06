@@ -10,8 +10,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
+        name: `utils`,
+        path: `${__dirname}/src/utils`,
       },
     },
     {
@@ -19,6 +19,7 @@ module.exports = {
       options: {
         apiURL: process.env.API_URL || `http://localhost:1337`,
         queryLimit: 1000, // Default to 100
+        singleTypes: ['landing-page'],
         contentTypes: ['events', `posts`, `users`, 'images', 'testimonials'],
       },
     },
@@ -27,8 +28,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Tao Te Kambo`,
+        short_name: `ToaTeKambo`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,

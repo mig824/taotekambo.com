@@ -4,7 +4,7 @@ import { Link } from 'gatsby';
 import { jsx, css } from '@emotion/react';
 
 import Logo from './images/Logo';
-import { PrimaryBtn } from '../utils/styles/components';
+import { PrimaryBtn } from '../utils/styles/styled-components';
 import {
   navLinkColor,
   secondaryColor,
