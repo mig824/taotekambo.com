@@ -1,48 +1,16 @@
-/** @jsx jsx */
 import React from 'react';
 import { Link } from 'gatsby';
-import { jsx, css } from '@emotion/react';
+import styled from '@emotion/styled';
 
-import Logo from './images/Logo';
-import { PrimaryBtn } from '../utils/styles/styled-components';
+import Logo from './Logo';
+import { PrimaryBtn } from './styled/Button';
 import {
   navLinkColor,
   secondaryColor,
   secondaryColorHover,
-} from '../utils/styles/colorscheme';
+} from '../utils/global/colorscheme';
 
-const NavBar = ({ siteTitle }: any) => (
-  <nav css={navBarCSS}>
-    <div className="left-div">
-      <ul>
-        <Link to="/shop">
-          <li>Shop</li>
-        </Link>
-        <Link to="/blog">
-          <li>Blog</li>
-        </Link>
-        <Link to="/contact">
-          <li>Contact</li>
-        </Link>
-        <Link to="/ceremonies">
-          <li>Ceremonies</li>
-        </Link>
-      </ul>
-    </div>
-    <div className="center-div">
-      <div className="logo-div">
-        <Link to="/">
-          <Logo />
-        </Link>
-      </div>
-    </div>
-    <div className="right-div">
-      <PrimaryBtn>Book a Session</PrimaryBtn>
-    </div>
-  </nav>
-);
-
-const navBarCSS = css`
+const NavCSS = styled.nav`
   display: flex;
   max-height: 3.3rem;
   padding-top: 1rem;
@@ -67,42 +35,75 @@ const navBarCSS = css`
     align-items: center;
     justify-content: space-around;
   }
+`;
 
-  .left-div {
+const LeftDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 0.7rem;
+
+  ul {
     display: flex;
-    justify-content: center;
+    list-style: none;
+    margin: auto;
     align-items: center;
-    padding-left: 0.7rem;
-
-    ul {
-      display: flex;
-      list-style: none;
-      margin: auto;
-      align-items: center;
-      color: ${secondaryColor};
-    }
-
-    li {
-      margin: auto;
-      padding-right: 0.6rem;
-    }
+    color: ${secondaryColor};
   }
 
-  .center-div {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .logo-div {
-      margin-top: 0.5rem;
-      max-height: 65px;
-      max-width: 65px;
-      border: none;
-    }
-  }
-
-  .right-div {
+  li {
+    margin: auto;
+    padding-right: 0.6rem;
   }
 `;
+
+const CenterDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const LogoDiv = styled.div`
+  margin-top: 0.5rem;
+  max-height: 65px;
+  max-width: 65px;
+  border: none;
+`;
+
+const NavBar = () => (
+  <NavCSS>
+    <LeftDiv>
+      <ul>
+        <Link to="/learn">
+          <li>Learn</li>
+        </Link>
+        <Link to="/shop">
+          <li>Shop</li>
+        </Link>
+        <Link to="/blog">
+          <li>Blog</li>
+        </Link>
+        <Link to="/contact">
+          <li>Contact</li>
+        </Link>
+        <Link to="/ceremonies">
+          <li>Ceremonies</li>
+        </Link>
+      </ul>
+    </LeftDiv>
+    <CenterDiv>
+      <LogoDiv>
+        <Link to="/">
+          <Logo />
+        </Link>
+      </LogoDiv>
+    </CenterDiv>
+    <div className="right-div">
+      <Link to="/ceremonies">
+        <PrimaryBtn variant="primary">Book a Session</PrimaryBtn>
+      </Link>
+    </div>
+  </NavCSS>
+);
 
 export default NavBar;

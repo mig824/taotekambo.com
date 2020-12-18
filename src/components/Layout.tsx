@@ -1,43 +1,67 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import React from 'react';
-import PropTypes from 'prop-types';
-import { useStaticQuery, graphql } from 'gatsby';
-import { Global as GlobalCSS } from '@emotion/react';
+import { Global as GlobalCSS, css } from '@emotion/react';
 
+import {
+  backgroundColor,
+  secondaryColor,
+  mainTextColor,
+} from '../utils/global/colorscheme';
 import NavBar from './NavBar';
 import Footer from './Footer';
-import globalCSS from '../utils/styles/global-css';
 import 'aos/dist/aos.css';
 
-const Layout = ({ children }: any) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `);
+const globalCSS = css`
+  html,
+  body {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+    background-color: ${backgroundColor};
+    height: 100%;
+  }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    max-width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3 {
+    color: ${secondaryColor};
+    margin-bottom: 2rem;
+  }
+
+  p {
+    color: ${mainTextColor};
+  }
+
+  footer {
+    position: fixed;
+    bottom: 0;
+  }
+`;
+
+const Layout = ({ children }: any) => {
   return (
     <>
       <GlobalCSS styles={globalCSS} />
-      <NavBar siteTitle={data?.site?.siteMetadata?.title || `Title`} />
+      <NavBar />
       <main>{children}</main>
       <Footer />
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

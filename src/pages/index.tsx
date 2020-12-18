@@ -1,24 +1,28 @@
-/**@jsx jsx */
 import React, { useEffect } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
+import { useStaticQuery, graphql, Link } from 'gatsby';
 import Img from 'gatsby-image';
-import { jsx, css } from '@emotion/react';
 import AOS from 'aos';
 
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
-import Banner from '../components/images/Banner';
+import Banner from '../components/Banner';
 import Testimonials from '../components/Testimonials';
+import { mainTextColor } from '../utils/global/colorscheme';
+import { PrimaryBtn } from '../components/styled/Button';
 import {
-  PrimaryBtn,
   SectionContainer,
   SectionContentWrapper,
-} from '../utils/styles/styled-components';
-import { mainTextColor } from '../utils/styles/colorscheme';
+  SectionHeader,
+} from '../components/styled/Section';
 
 const IndexPage = () => {
-  const { pageContent, testimonials } = useStaticQuery(graphql`
+  const { pageContent, testimonials, site } = useStaticQuery(graphql`
     query GetLandingPageData {
+      site {
+        siteMetadata {
+          title
+        }
+      }
       pageContent: strapiLandingPage {
         bannerText
         kamboStory
@@ -65,23 +69,30 @@ const IndexPage = () => {
   return (
     <Layout>
       <SEO title="Home" />
-      <Banner bannerText={pageContent.bannerText} />
+      <Banner
+        bannerText={pageContent.bannerText}
+        siteTitle={site.siteMetadata.title}
+      />
       <SectionContainer>
         <SectionContentWrapper>
           <h2
             data-aos="fade-right"
-            data-aos-delay={1000}
+            data-aos-delay={700}
             data-aos-duration={1500}
           >
             {pageContent.kamboStory}
           </h2>
           <div
             data-aos="fade-left"
-            data-aos-delay={1000}
+            data-aos-delay={700}
             data-aos-duration={1500}
           >
             <p>{pageContent.kamboStoryContent}</p>
-            <PrimaryBtn marginTop>Learn More</PrimaryBtn>
+            <Link to="/learn">
+              <PrimaryBtn margin="2rem 0 0 0" variant="primary">
+                Learn More
+              </PrimaryBtn>
+            </Link>
           </div>
         </SectionContentWrapper>
       </SectionContainer>
@@ -89,22 +100,16 @@ const IndexPage = () => {
         <SectionContentWrapper>
           <div data-aos="fade-right">
             <p>{pageContent.kamboBenefitsContent}</p>
-            <PrimaryBtn marginTop>The Science</PrimaryBtn>
+            <Link to="/learn/#the-science">
+              <PrimaryBtn margin="2rem 0 0 0" variant="primary">
+                The Science
+              </PrimaryBtn>
+            </Link>
           </div>
           <h2 data-aos="fade-left">{pageContent.kamboBenefits}</h2>
         </SectionContentWrapper>
       </SectionContainer>
-      <SectionContainer>
-        <SectionContentWrapper>
-          <div data-aos="fade-right">
-            <Img fixed={pageContent.myStoryImage.childImageSharp.fixed} />
-          </div>
-          <div data-aos="fade-left">
-            <h2>{pageContent.myStory}</h2>
-            <p>{pageContent.myStoryContent}</p>
-          </div>
-        </SectionContentWrapper>
-      </SectionContainer>
+
       <SectionContainer>
         <SectionContentWrapper>
           <h2 data-aos="fade-right">Kambo can help if...</h2>
@@ -117,21 +122,24 @@ const IndexPage = () => {
           </div>
         </SectionContentWrapper>
       </SectionContainer>
-      <h2 data-aos="zoom-in-up">Testimonials</h2>
+      <SectionContainer>
+        <SectionContentWrapper>
+          <div data-aos="fade-right">
+            <Img fixed={pageContent.myStoryImage.childImageSharp.fixed} />
+          </div>
+          <div data-aos="fade-left">
+            <h2>{pageContent.myStory}</h2>
+            <br />
+            <p>{pageContent.myStoryContent}</p>
+          </div>
+        </SectionContentWrapper>
+      </SectionContainer>
+      <SectionHeader>
+        <h2 data-aos="zoom-in-up">Testimonials</h2>
+      </SectionHeader>
       <Testimonials testimonialData={testimonials.edges} />
     </Layout>
   );
 };
-
-// const homePageCSS = css`
-//   section {
-//     display: flex;
-//     max-height: 3.3rem;
-//     padding-top: 1rem;
-//     width: 100%;
-//     margin-bottom: 1rem;
-//     z-index: 4;
-//   }
-// `;
 
 export default IndexPage;

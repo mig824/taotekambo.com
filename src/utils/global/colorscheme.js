@@ -5,3 +5,4 @@ export const navLinkColor = secondaryColor;
 export const mainTextColor = '#fafafa';
 export const primaryColorHover = '#7c5a7c';
 export const secondaryColorHover = '#e4cba1';
+export const darkAccentColor = '#2b2b2b';

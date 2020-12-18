@@ -1,11 +1,14 @@
 /** @jsx jsx */
-import React, { useEffect, useRef } from 'react';
+import _React, { useEffect, useRef } from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 import { css, jsx } from '@emotion/react';
 import Img from 'gatsby-image';
 import Rellax from 'rellax';
 
-import { secondaryColor } from '../../utils/styles/colorscheme';
+import {
+  darkAccentColor,
+  secondaryColor,
+} from '../utils/global/colorscheme.js';
 
 const bannerCSS = css`
   max-height: fit-content;
@@ -16,10 +19,29 @@ const bannerCSS = css`
   .text-wrapper {
     z-index: 2;
     position: absolute;
-    top: 10%;
+    bottom: 30%;
     width: 40%;
     text-align: center;
-    margin-left: 4rem;
+    margin-left: 1rem;
+
+    h3 {
+      color: ${secondaryColor};
+    }
+  }
+
+  .title-wrapper {
+    z-index: 2;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 40%;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: ${darkAccentColor};
 
     h3 {
       color: ${secondaryColor};
@@ -27,7 +49,12 @@ const bannerCSS = css`
   }
 `;
 
-const Banner = ({ bannerText }) => {
+type BannerProps = {
+  siteTitle: string;
+  bannerText: string;
+};
+
+const Banner = ({ bannerText, siteTitle }: BannerProps) => {
   const bannerWrapperRef = useRef();
   const data = useStaticQuery(graphql`
     query BannerImgQuery {
@@ -53,11 +80,20 @@ const Banner = ({ bannerText }) => {
     <div ref={bannerWrapperRef} css={bannerCSS}>
       <div
         className="text-wrapper"
-        data-aos="fade-down-right"
-        data-aos-delay={1000}
+        data-aos="zoom-out-right"
+        data-aos-delay={400}
         data-aos-duration={2000}
       >
         <h3>{bannerText}</h3>
+      </div>
+      <div
+        className="title-wrapper"
+        data-aos="fade-down"
+        data-aos-delay={400}
+        data-aos-duration={2000}
+        data-aos-anchor-position="top-center"
+      >
+        <h2>{siteTitle}</h2>
       </div>
       <Img fluid={data.strapiImages.singleImages.childImageSharp.fluid} />
     </div>

@@ -1,10 +1,55 @@
 /** @jsx jsx */
-import React, { useState, useRef, useEffect } from 'react';
+import _React, { useState, useRef, useEffect } from 'react';
 import { jsx, css } from '@emotion/react';
+import styled from '@emotion/styled';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 import Testimonial from './Testimonial';
-import { secondaryColor, primaryColor } from '../utils/styles/colorscheme';
+import { secondaryColor, primaryColor } from '../utils/global/colorscheme';
+
+const SlideContainer = styled.div`
+  max-width: 60vw;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+`;
+
+const PrevBtn = styled.button`
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  left: 4rem;
+  font-size: 2rem;
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const NextBtn = styled.button`
+  position: absolute;
+  top: 50%;
+  z-index: 10;
+  right: 4rem;
+  font-size: 2rem;
+  color: #fff;
+  opacity: 0.8;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
 
 const Testimonials = ({ testimonialData }) => {
   const containerRef = useRef<HTMLInputElement>(null);
@@ -21,20 +66,12 @@ const Testimonials = ({ testimonialData }) => {
     setDimensions(dimensions);
   }, []);
 
-  const testimonialsCSS = css`
+  const dynamicCSS = css`
     position: relative;
     width: 100%;
     background-color: ${primaryColor};
 
-    .carousel-container {
-      max-width: 60vw;
-      margin: auto;
-      overflow: hidden;
-      position: relative;
-      display: flex;
-    }
-
-    .carousel-slide {
+    .testimonial-slide {
       display: flex;
       flex-wrap: wrap;
       min-width: ${width}px;
@@ -54,47 +91,11 @@ const Testimonials = ({ testimonialData }) => {
         font-size: 0.8rem;
       }
     }
-
-    .prev-btn {
-      position: absolute;
-      top: 50%;
-      z-index: 10;
-      left: 4rem;
-      font-size: 2rem;
-      color: #fff;
-      opacity: 0.8;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
-    .next-btn {
-      position: absolute;
-      top: 50%;
-      z-index: 10;
-      right: 4rem;
-      font-size: 2rem;
-      color: #fff;
-      opacity: 0.8;
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 1;
-      }
-    }
   `;
 
   return (
-    <div css={testimonialsCSS}>
-      <button
-        className="prev-btn"
+    <div css={dynamicCSS}>
+      <PrevBtn
         onClick={() => {
           if (count <= 0) return;
           setNextSlide(true);
@@ -102,9 +103,8 @@ const Testimonials = ({ testimonialData }) => {
         }}
       >
         <FaAngleLeft />
-      </button>
-      <div
-        className="carousel-container"
+      </PrevBtn>
+      <SlideContainer
         ref={containerRef}
         onTransitionEnd={() => {
           const slideNode = containerRef?.current?.childNodes[count];
@@ -133,9 +133,8 @@ const Testimonials = ({ testimonialData }) => {
           key={`${testimonialData[0].node.id}-clone`}
           position="last"
         />
-      </div>
-      <button
-        className="next-btn"
+      </SlideContainer>
+      <NextBtn
         onClick={() => {
           if (count > testimonialData.length) return;
           setNextSlide(true);
@@ -143,7 +142,7 @@ const Testimonials = ({ testimonialData }) => {
         }}
       >
         <FaAngleRight />
-      </button>
+      </NextBtn>
     </div>
   );
 };
