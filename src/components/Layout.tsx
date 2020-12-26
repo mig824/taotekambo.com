@@ -6,6 +6,7 @@ import {
   secondaryColor,
   mainTextColor,
 } from '../utils/global/colorscheme';
+import { rhythm } from '../utils/global/typography';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import 'aos/dist/aos.css';
@@ -50,6 +51,20 @@ const globalCSS = css`
   footer {
     position: fixed;
     bottom: 0;
+  }
+
+  @media (max-width: 620px) {
+    h1,
+    h2,
+    h3 {
+      font-size: ${rhythm(0.6)};
+    }
+
+    p,
+    a,
+    li {
+      font-size: ${rhythm(0.55)};
+    }
   }
 `;
 
