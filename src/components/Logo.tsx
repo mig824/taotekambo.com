@@ -8,7 +8,7 @@ const Logo = () => {
       strapiImages(name: { eq: "logo" }) {
         singleImages {
           childImageSharp {
-            fixed(width: 55, height: 55, fit: CONTAIN) {
+            fixed(width: 40, height: 40, fit: CONTAIN) {
               ...GatsbyImageSharpFixed
             }
           }
