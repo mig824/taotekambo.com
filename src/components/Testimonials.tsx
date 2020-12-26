@@ -13,6 +13,10 @@ const SlideContainer = styled.div`
   overflow: hidden;
   position: relative;
   display: flex;
+
+  @media (max-width: 620px) {
+    max-width: 90vw;
+  }
 `;
 
 const PrevBtn = styled.button`
@@ -30,6 +34,10 @@ const PrevBtn = styled.button`
 
   &:hover {
     opacity: 1;
+  }
+
+  @media (max-width: 620px) {
+    left: 0.5rem;
   }
 `;
 
@@ -49,7 +57,15 @@ const NextBtn = styled.button`
   &:hover {
     opacity: 1;
   }
+
+  @media (max-width: 620px) {
+    right: 0.5rem;
+  }
 `;
+
+// type ChildNode = {
+//   id?: string
+// }
 
 const Testimonials = ({ testimonialData }) => {
   const containerRef = useRef<HTMLInputElement>(null);
@@ -58,12 +74,19 @@ const Testimonials = ({ testimonialData }) => {
   const [{ width }, setDimensions] = useState({ height: 0, width: 0 });
 
   useEffect(() => {
-    const dimensions = {
+    setDimensions({
       height: containerRef.current.getBoundingClientRect().height,
       width: containerRef.current.getBoundingClientRect().width,
+    });
+    const handleResize = () => {
+      setDimensions({
+        height: containerRef.current.getBoundingClientRect().height,
+        width: containerRef.current.getBoundingClientRect().width,
+      });
     };
+    window.addEventListener('resize', handleResize);
 
-    setDimensions(dimensions);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const dynamicCSS = css`
