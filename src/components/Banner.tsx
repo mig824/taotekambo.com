@@ -5,10 +5,7 @@ import { css, jsx } from '@emotion/react';
 import Img from 'gatsby-image';
 import Rellax from 'rellax';
 
-import {
-  darkAccentColor,
-  secondaryColor,
-} from '../utils/global/colorscheme.js';
+import { secondaryColor } from '../utils/global/colorscheme.js';
 
 const bannerCSS = css`
   max-height: fit-content;
@@ -23,6 +20,7 @@ const bannerCSS = css`
     width: 40%;
     text-align: center;
     margin-left: 1rem;
+    display: none; // NOTE: show text again
 
     h3 {
       color: ${secondaryColor};
@@ -30,21 +28,20 @@ const bannerCSS = css`
   }
 
   .title-wrapper {
-    z-index: 2;
     position: absolute;
-    margin: auto;
+    z-index: 2;
     top: 0;
+    bottom: 10%;
     left: 0;
     right: 0;
-    width: 40%;
-    text-align: center;
-    width: 100%;
     display: flex;
     justify-content: center;
-    background-color: ${darkAccentColor};
+    align-items: center;
 
     h3 {
       color: ${secondaryColor};
+      padding-bottom: 1rem;
+      border: solid blue 1px;
     }
   }
 `;
