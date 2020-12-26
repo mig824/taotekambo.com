@@ -14,4 +14,5 @@ import stAnnesTheme from 'typography-theme-st-annes';
 
 const typography = new Typography(stAnnesTheme);
 
+export const { rhythm, scale } = typography;
 export default typography;
