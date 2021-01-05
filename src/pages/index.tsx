@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import { useStaticQuery, graphql, Link } from 'gatsby';
-import Img from 'gatsby-image';
+import { graphql, Link } from 'gatsby';
+import { AnchorLink } from 'gatsby-plugin-anchor-links';
+import styled from '@emotion/styled';
 import AOS from 'aos';
 
-import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import Banner from '../components/Banner';
 import Testimonials from '../components/Testimonials';
-import { mainTextColor } from '../utils/global/colorscheme';
+import ScrollTopArrow from '../components/ScrollTopArrow';
+import { mainTextColor } from '../utils/style/colorscheme';
 import { PrimaryBtn } from '../components/styled/Button';
 import {
   SectionContainer,
@@ -15,82 +16,64 @@ import {
   SectionHeader,
 } from '../components/styled/Section';
 
-const IndexPage = () => {
-  const { pageContent, testimonials, site } = useStaticQuery(graphql`
-    query GetLandingPageData {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-      pageContent: strapiLandingPage {
-        bannerText
-        kamboStory
-        kamboStoryContent
-        kamboBenefits
-        kamboBenefitsContent
-        myStory
-        myStoryContent
-        myStoryImage {
-          childImageSharp {
-            fixed {
-              ...GatsbyImageSharpFixed
-            }
-          }
-        }
-      }
-      testimonials: allStrapiTestimonials {
-        edges {
-          node {
-            id
-            content
-            personDescription
-            image {
-              childImageSharp {
-                fixed(width: 80, height: 80) {
-                  ...GatsbyImageSharpFixed
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  `);
+const H2Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
+const UL = styled.ul`
+  text-align: left;
+  color: ${mainTextColor};
+  padding-left: 25%;
+`;
+
+const HomePage = ({ data: { pageContent, testimonials, site } }) => {
   useEffect(() => {
     AOS.init({
-      mirror: true,
       duration: 1500,
-      anchorPlacement: 'center-bottom',
+      anchorPlacement: 'top-bottom',
     });
   }, []);
 
   return (
-    <Layout>
+    <>
       <SEO title="Home" />
       <Banner
-        bannerText={pageContent.bannerText}
+        bannerImg={pageContent.bannerImg.sharp.fluid}
         siteTitle={site.siteMetadata.title}
       />
       <SectionContainer>
         <SectionContentWrapper>
-          <h2
-            data-aos="fade-right"
-            data-aos-delay={700}
-            data-aos-duration={1500}
-          >
-            {pageContent.kamboStory}
-          </h2>
+          <H2Wrapper data-aos="fade-right">
+            <h2>The Story of Kambo</h2>
+          </H2Wrapper>
           <div
             data-aos="fade-left"
             data-aos-delay={700}
             data-aos-duration={1500}
           >
-            <p>{pageContent.kamboStoryContent}</p>
+            <p>
+              The legend of the Kaxinawá says that deep in the jungle a tribe
+              fell ill. The local medicine man named Kampu tried to heal the
+              village with well know plant medicines, though he didn't have any
+              breakthroughs. Kampu went into the jungle to sit in isolation
+              drinking Ayahuasca. This master teacher plant showed him about
+              Kambo medicine, it’s healing properties, and how to use it.
+            </p>
+            <br />
+            <p>
+              {' '}
+              Kampu then set out into the jungle to find the correct frog,
+              extract then medicine and return to his village. Upon returning he
+              helped heal his entire village with this intelligent sacred
+              medicine. The name Kambo was given to the medicine named after
+              this Shaman that was able to listen to the plants and heal others
+              with the wisdom he received.
+            </p>
             <Link to="/learn">
               <PrimaryBtn margin="2rem 0 0 0" variant="primary">
-                Learn More
+                Learn More About Kambo
               </PrimaryBtn>
             </Link>
           </div>
@@ -99,38 +82,40 @@ const IndexPage = () => {
       <SectionContainer>
         <SectionContentWrapper>
           <div data-aos="fade-right">
-            <p>{pageContent.kamboBenefitsContent}</p>
-            <Link to="/learn/#the-science">
+            <p>
+              Kambo enters through the lymphatic system and awakens the body's
+              self-healing abilities. It has been known to help with Anxiety,
+              Depression, lack of motivation and clarity, Addiction, Candida,
+              Staph Infection, High Blood Pressure, Parkinson's, Auto-immune
+              Disorders, HIV & AID's, Cancer, Fertility and so much more.
+            </p>
+            <AnchorLink
+              to="/learn#the-science"
+              title="Button to the science section"
+              stripHash
+            >
               <PrimaryBtn margin="2rem 0 0 0" variant="primary">
                 The Science
               </PrimaryBtn>
-            </Link>
+            </AnchorLink>
           </div>
-          <h2 data-aos="fade-left">{pageContent.kamboBenefits}</h2>
+          <H2Wrapper className="change-order" data-aos="fade-left">
+            <h2>Benefits from Kambo</h2>
+          </H2Wrapper>
         </SectionContentWrapper>
       </SectionContainer>
 
       <SectionContainer>
         <SectionContentWrapper>
-          <h2 data-aos="fade-right">Kambo can help if...</h2>
+          <H2Wrapper data-aos="fade-right">
+            <h2>Kambo can help if...</h2>
+          </H2Wrapper>
           <div data-aos="fade-left">
-            <ul style={{ textAlign: 'left', color: mainTextColor }}>
+            <UL>
               <li>You are feeling a lack of clarity</li>
               <li>You are struggling with food or drug addiction</li>
               <li>You are experiencing depression, anxiety, or stress</li>
-            </ul>
-          </div>
-        </SectionContentWrapper>
-      </SectionContainer>
-      <SectionContainer>
-        <SectionContentWrapper>
-          <div data-aos="fade-right">
-            <Img fixed={pageContent.myStoryImage.childImageSharp.fixed} />
-          </div>
-          <div data-aos="fade-left">
-            <h2>{pageContent.myStory}</h2>
-            <br />
-            <p>{pageContent.myStoryContent}</p>
+            </UL>
           </div>
         </SectionContentWrapper>
       </SectionContainer>
@@ -138,8 +123,46 @@ const IndexPage = () => {
         <h2 data-aos="zoom-in-up">Testimonials</h2>
       </SectionHeader>
       <Testimonials testimonialData={testimonials.edges} />
-    </Layout>
+      <ScrollTopArrow />
+    </>
   );
 };
 
-export default IndexPage;
+export const query = graphql`
+  query HomePageQuery {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    pageContent: strapiLandingPage {
+      bannerImg {
+        sharp: childImageSharp {
+          fluid(quality: 75, maxHeight: 1440, maxWidth: 2560) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+    testimonials: allStrapiTestimonials(
+      sort: { order: DESC, fields: personDescription }
+    ) {
+      edges {
+        node {
+          id
+          content
+          personDescription
+          image {
+            childImageSharp {
+              fluid(maxWidth: 90, maxHeight: 90) {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export default HomePage;

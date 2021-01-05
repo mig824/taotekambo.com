@@ -5,17 +5,19 @@ import styled from '@emotion/styled';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
 import Testimonial from './Testimonial';
-import { secondaryColor, primaryColor } from '../utils/global/colorscheme';
+import { secondaryColor, primaryColor } from '../utils/style/colorscheme';
+import { tabletPortrait768 } from '../utils/style/breakpoints';
 
 const SlideContainer = styled.div`
-  max-width: 60vw;
+  width: 90vw;
+  max-width: 60em;
   margin: auto;
   overflow: hidden;
   position: relative;
   display: flex;
 
-  @media (max-width: 620px) {
-    max-width: 90vw;
+  ${tabletPortrait768} {
+    width: 70vw;
   }
 `;
 
@@ -23,7 +25,7 @@ const PrevBtn = styled.button`
   position: absolute;
   top: 50%;
   z-index: 10;
-  left: 4rem;
+  left: 0.5rem;
   font-size: 2rem;
   color: #fff;
   opacity: 0.8;
@@ -36,8 +38,8 @@ const PrevBtn = styled.button`
     opacity: 1;
   }
 
-  @media (max-width: 620px) {
-    left: 0.5rem;
+  ${tabletPortrait768} {
+    left: 4rem;
   }
 `;
 
@@ -45,7 +47,7 @@ const NextBtn = styled.button`
   position: absolute;
   top: 50%;
   z-index: 10;
-  right: 4rem;
+  right: 0.5rem;
   font-size: 2rem;
   color: #fff;
   opacity: 0.8;
@@ -58,8 +60,8 @@ const NextBtn = styled.button`
     opacity: 1;
   }
 
-  @media (max-width: 620px) {
-    right: 0.5rem;
+  ${tabletPortrait768} {
+    right: 4rem;
   }
 `;
 
@@ -74,15 +76,11 @@ const Testimonials = ({ testimonialData }) => {
   const [{ width }, setDimensions] = useState({ height: 0, width: 0 });
 
   useEffect(() => {
-    setDimensions({
-      height: containerRef.current.getBoundingClientRect().height,
-      width: containerRef.current.getBoundingClientRect().width,
-    });
+    let { height, width } = containerRef.current.getBoundingClientRect();
+    setDimensions({ height, width });
     const handleResize = () => {
-      setDimensions({
-        height: containerRef.current.getBoundingClientRect().height,
-        width: containerRef.current.getBoundingClientRect().width,
-      });
+      let { height, width } = containerRef.current.getBoundingClientRect();
+      setDimensions({ height, width });
     };
     window.addEventListener('resize', handleResize);
 

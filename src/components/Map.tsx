@@ -1,9 +1,6 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L, { LatLngTuple } from 'leaflet';
-import icon from 'leaflet/dist/images/marker-icon.png';
-import iconShadow from 'leaflet/dist/images/marker-shadow.png';
-import 'leaflet/dist/leaflet.css';
+import { LatLngTuple } from 'leaflet';
 
 type MapProps = {
   centerPosition: LatLngTuple;
@@ -29,16 +26,9 @@ const Map = ({
       attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
-    <Marker
-      position={markerPosition}
-      icon={L.icon({
-        iconUrl: icon,
-        shadowUrl: iconShadow,
-        popupAnchor: [13, 8],
-      })}
-    >
+    <Marker position={markerPosition}>
       <Popup>
-        <a href={`http://maps.google.com/?q=${address}`}>Get Directions</a>
+        <a href={`http://maps.google.com/?q=${address}`}>Open Map</a>
       </Popup>
     </Marker>
   </MapContainer>

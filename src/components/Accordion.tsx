@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  FunctionComponent,
+  ReactElement,
+} from 'react';
 import { AiOutlineRight } from 'react-icons/ai';
 import styled from '@emotion/styled';
 import {
@@ -6,7 +12,9 @@ import {
   mainTextColor,
   secondaryColor,
   secondaryColorHover,
-} from '../utils/global/colorscheme';
+} from '../utils/style/colorscheme';
+import { desktop1200, tabletPortrait768 } from '../utils/style/breakpoints';
+import { rhythm } from '../utils/style/typography';
 
 const AccordionSection = styled.div`
   display: flex;
@@ -14,15 +22,20 @@ const AccordionSection = styled.div`
   margin-bottom: 1rem;
 `;
 
-const AccordionTitle = styled.button`
-  background-color: ${backgroundColor};
+type AccordionTitleProps = {
+  bgColor?: string;
+};
+
+const AccordionTitle = styled.button<AccordionTitleProps>`
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : backgroundColor)};
   color: ${mainTextColor};
   cursor: pointer;
+  margin-top: -1rem;
   display: flex;
-  justify-content: flex-start;
   border: none;
   outline: none;
   transition: background-color 0.6s ease;
+  padding: 0.5rem 0;
 
   &:hover,
   .active {
@@ -30,8 +43,6 @@ const AccordionTitle = styled.button`
   }
 
   .title {
-    font-size: large;
-    font-weight: 500;
     color: ${secondaryColor};
 
     &:hover {
@@ -46,10 +57,26 @@ const AccordionTitle = styled.button`
   .rotate {
     transform: rotate(90deg);
   }
+
+  ${tabletPortrait768} {
+    .title {
+      font-size: ${rhythm(0.7)};
+    }
+  }
+
+  ${desktop1200} {
+    .title {
+      font-size: ${rhythm(0.85)};
+    }
+  }
 `;
 
-const AccordionContent = styled.div`
-  background-color: ${backgroundColor};
+type AccordionContentProps = {
+  bgColor?: string;
+};
+
+const AccordionContent = styled.div<AccordionContentProps>`
+  background-color: ${({ bgColor }) => (bgColor ? bgColor : backgroundColor)};
   overflow: hidden;
   transition: max-height 0.6s ease;
 
@@ -59,7 +86,17 @@ const AccordionContent = styled.div`
   }
 `;
 
-const Accordion = ({ children, title }) => {
+type AccordionProps = {
+  children: ReactElement;
+  title: string;
+  bgColor?: string;
+};
+
+const Accordion: FunctionComponent<AccordionProps> = ({
+  children,
+  title,
+  bgColor,
+}) => {
   const [active, setActive] = useState(false);
   const contentRef = useRef(null);
 
@@ -75,13 +112,21 @@ const Accordion = ({ children, title }) => {
 
   return (
     <AccordionSection>
-      <AccordionTitle onClick={toggleActive}>
+      <AccordionTitle
+        onClick={toggleActive}
+        bgColor={bgColor ? bgColor : backgroundColor}
+      >
         <p className="title">{title}</p>
         <span className={active ? 'accordion-icon rotate' : 'accordion-icon'}>
           <AiOutlineRight />
         </span>
       </AccordionTitle>
-      <AccordionContent ref={contentRef}>{children}</AccordionContent>
+      <AccordionContent
+        ref={contentRef}
+        bgColor={bgColor ? bgColor : backgroundColor}
+      >
+        {children}
+      </AccordionContent>
     </AccordionSection>
   );
 };

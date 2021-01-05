@@ -6,7 +6,7 @@ import {
   primaryColorHover,
   secondaryColorHover,
   backgroundColor,
-} from '../../utils/global/colorscheme';
+} from '../../utils/style/colorscheme';
 
 type PrimaryBtnProps = {
   margin?: string;
@@ -21,6 +21,7 @@ export const PrimaryBtn = styled.button<PrimaryBtnProps>`
   color: ${secondaryColor};
   padding: 0.2rem 0.65rem;
   margin: ${({ margin }) => (margin ? margin : null)};
+  transition: background-color ease-in-out 300ms, color ease-in-out 300ms;
 
   &:hover {
     background-color: ${({ variant }) =>

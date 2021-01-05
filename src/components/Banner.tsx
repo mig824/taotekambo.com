@@ -1,14 +1,16 @@
-/** @jsx jsx */
-import _React, { useEffect, useRef } from 'react';
-import { useStaticQuery, graphql } from 'gatsby';
-import { css, jsx } from '@emotion/react';
-import Img from 'gatsby-image';
+import React, { useEffect, useRef } from 'react';
+import styled from '@emotion/styled';
+import Img, { FluidObject } from 'gatsby-image';
 import Rellax from 'rellax';
 
-import { secondaryColor } from '../utils/global/colorscheme.js';
+import { secondaryColor } from '../utils/style/colorscheme';
+import {
+  tabletLandscape992,
+  tabletPortrait768,
+} from '../utils/style/breakpoints';
 
-const bannerCSS = css`
-  max-height: fit-content;
+const BannerCSS = styled.div`
+  max-height: 100vh;
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -16,14 +18,23 @@ const bannerCSS = css`
   .text-wrapper {
     z-index: 2;
     position: absolute;
-    bottom: 30%;
-    width: 40%;
+    bottom: 0;
+    width: 16em;
     text-align: center;
     margin-left: 1rem;
-    display: none; // NOTE: show text again
+    display: none;
 
     h3 {
       color: ${secondaryColor};
+    }
+
+    ${tabletPortrait768} {
+      display: block;
+    }
+
+    ${tabletLandscape992} {
+      top: 10%;
+      margin-left: 1.3em;
     }
   }
 
@@ -41,31 +52,17 @@ const bannerCSS = css`
     h3 {
       color: ${secondaryColor};
       padding-bottom: 1rem;
-      border: solid blue 1px;
     }
   }
 `;
 
 type BannerProps = {
   siteTitle: string;
-  bannerText: string;
+  bannerImg: FluidObject;
 };
 
-const Banner = ({ bannerText, siteTitle }: BannerProps) => {
+const Banner = ({ bannerImg, siteTitle }: BannerProps) => {
   const bannerWrapperRef = useRef();
-  const data = useStaticQuery(graphql`
-    query BannerImgQuery {
-      strapiImages(name: { eq: "frog-on-a-rock" }) {
-        singleImages {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid
-            }
-          }
-        }
-      }
-    }
-  `);
 
   useEffect(() => {
     new Rellax(bannerWrapperRef.current, {
@@ -74,14 +71,17 @@ const Banner = ({ bannerText, siteTitle }: BannerProps) => {
   }, []);
 
   return (
-    <div ref={bannerWrapperRef} css={bannerCSS}>
+    <BannerCSS ref={bannerWrapperRef}>
       <div
         className="text-wrapper"
         data-aos="zoom-out-right"
         data-aos-delay={400}
         data-aos-duration={2000}
       >
-        <h3>{bannerText}</h3>
+        <h3>
+          Can a Little Known Amazonian Frog Medicine Help You Heal and Align
+          Your Life in a Single Session?
+        </h3>
       </div>
       <div
         className="title-wrapper"
@@ -92,8 +92,8 @@ const Banner = ({ bannerText, siteTitle }: BannerProps) => {
       >
         <h2>{siteTitle}</h2>
       </div>
-      <Img fluid={data.strapiImages.singleImages.childImageSharp.fluid} />
-    </div>
+      <Img fluid={bannerImg} />
+    </BannerCSS>
   );
 };
 

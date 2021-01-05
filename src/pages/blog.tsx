@@ -1,7 +1,6 @@
 import React from 'react';
 import { useStaticQuery, graphql } from 'gatsby';
 
-import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 import Post from '../components/Post';
 
@@ -25,7 +24,7 @@ const BlogPage = () => {
   `);
 
   return (
-    <Layout>
+    <>
       <SEO title="Blog" />
       <div>
         <h1>Blog</h1>
@@ -33,7 +32,7 @@ const BlogPage = () => {
       {nodes.map((node: any) => (
         <Post post={node} key={node.id} />
       ))}
-    </Layout>
+    </>
   );
 };
 

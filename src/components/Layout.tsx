@@ -5,8 +5,9 @@ import {
   backgroundColor,
   secondaryColor,
   mainTextColor,
-} from '../utils/global/colorscheme';
-import { rhythm } from '../utils/global/typography';
+} from '../utils/style/colorscheme';
+import { rhythm } from '../utils/style/typography';
+import { tabletLandscape992 } from '../utils/style/breakpoints';
 import NavBar from './NavBar';
 import Footer from './Footer';
 import 'aos/dist/aos.css';
@@ -18,7 +19,8 @@ const globalCSS = css`
     margin: 0px;
     padding: 0px;
     background-color: ${backgroundColor};
-    height: 100%;
+    position: relative;
+    min-height: 100vh;
   }
 
   *,
@@ -35,6 +37,7 @@ const globalCSS = css`
     max-width: 100%;
     min-height: 100%;
     overflow-x: hidden;
+    padding-bottom: 6em;
   }
 
   h1,
@@ -48,22 +51,17 @@ const globalCSS = css`
     color: ${mainTextColor};
   }
 
-  footer {
-    position: fixed;
-    bottom: 0;
-  }
-
-  @media (max-width: 620px) {
+  ${tabletLandscape992} {
     h1,
     h2,
     h3 {
-      font-size: ${rhythm(0.6)};
+      font-size: ${rhythm(0.9)};
     }
 
     p,
     a,
     li {
-      font-size: ${rhythm(0.55)};
+      font-size: ${rhythm(0.7)};
     }
   }
 `;
