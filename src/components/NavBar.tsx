@@ -12,7 +12,7 @@ import {
   secondaryColor,
   secondaryColorHover,
 } from '../utils/style/colorscheme';
-import { tabletPortrait768, desktop1200 } from '../utils/style/breakpoints';
+import { tabletPortrait768 } from '../utils/style/breakpoints';
 import { rhythm } from '../utils/style/typography';
 import { AiOutlineDown } from 'react-icons/ai';
 
@@ -29,6 +29,7 @@ const NavCSS = styled.nav`
   a {
     color: ${navLinkColor};
     text-decoration: none;
+    transition: color 0.3s ease-in-out;
 
     &:hover {
       color: ${secondaryColorHover};
@@ -45,7 +46,6 @@ const NavCSS = styled.nav`
   #dropdown {
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
     position: absolute;
     top: 6em;
     width: fit-content;
@@ -54,7 +54,6 @@ const NavCSS = styled.nav`
     background-color: ${backgroundColor};
     border: 1px solid ${secondaryColor};
     box-shadow: 0 -3px 6px 1px ${darkAccentColor};
-    /* border-top: none; */
     border-radius: 8px;
     padding: 0 1em;
 
@@ -62,7 +61,6 @@ const NavCSS = styled.nav`
       display: flex;
       align-items: center;
       padding: 0.2em 0.5em;
-      /* height: 50px; */
     }
 
     ${tabletPortrait768} {
@@ -74,11 +72,6 @@ const NavCSS = styled.nav`
     margin-bottom: 1rem;
     flex-direction: row;
   }
-  /* 
-  ${desktop1200} {
-    max-height: 3.5rem;
-    margin-bottom: 1rem;
-  } */
 `;
 
 const LinksDiv = styled.div`
@@ -107,10 +100,15 @@ const LinksDiv = styled.div`
 
     li {
       margin-right: -0.4em;
+      color: ${secondaryColor};
+
+      transition: color 0.3s ease-in-out;
+      &:hover {
+        color: ${secondaryColorHover};
+      }
     }
 
     &:hover {
-      color: ${secondaryColorHover};
       cursor: pointer;
     }
   }
@@ -239,6 +237,9 @@ const NavBar = () => {
               learnLinkRef={learnLinkRef}
             />
           )}
+          <Link to="/social">
+            <li>Social</li>
+          </Link>
           <Link to="/shop">
             <li>Shop</li>
           </Link>

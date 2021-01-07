@@ -3,6 +3,7 @@ import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 import {
   darkAccentColor,
+  mainTextColor,
   primaryColor,
   secondaryColor,
   secondaryColorHover,
@@ -14,12 +15,11 @@ import {
 } from '../utils/style/breakpoints';
 
 const EventWrapper = styled.div`
-  padding: 2rem;
-  text-align: center;
   background-color: ${primaryColor};
   border-radius: 15px;
   border: 1px solid ${secondaryColor};
   box-shadow: 0 0 18px 5px #222;
+  overflow: hidden;
 
   p {
     margin: 1rem 0 -0.5em 0;
@@ -37,18 +37,24 @@ const EventWrapper = styled.div`
     display: flex;
     flex-direction: column;
     height: 100%;
+
+    button {
+      max-width: fit-content;
+      margin: 2em auto 0 auto;
+    }
   }
 `;
 
 const ImageWrapper = styled.div`
-  max-width: 75%;
-  height: 12em;
-  width: 12em;
-  margin: auto;
+  height: 14em;
+  width: 100%;
+  margin-top: -2em;
+  overflow: hidden;
+`;
 
-  ${mobileLandscape480} {
-    max-width: 12em;
-  }
+const EventDetailsWrapper = styled.div`
+  padding: 0 2em 2em 2em;
+  text-align: center;
 `;
 
 const DateWrapper = styled.div`
@@ -102,13 +108,10 @@ const PriceWrapper = styled.div`
 
 const Ceremony = ({
   ceremonyData: {
-    title,
-    street,
-    city,
-    state,
-    zipCode,
-    date,
-    description,
+    eventName,
+    address,
+    eventDate,
+    eventDescription,
     eventImage,
     startTime,
     endTime,
@@ -116,48 +119,47 @@ const Ceremony = ({
     privatePrice,
   },
 }) => {
-  const address = `${street}, ${city}, ${state} ${zipCode}`;
-
   return (
     <EventWrapper>
       <ImageWrapper>
-        <Img fluid={eventImage.sharp.fluid} />
+        <Img fluid={eventImage.fluid} />
       </ImageWrapper>
-      <h2>{title}</h2>
-      <DateWrapper>
-        <h3>{date}</h3>
-      </DateWrapper>
-      <p>{address}</p>
-      <a href={`http://maps.google.com/?q=${address}`}>Get Directions</a>
-      <p>
-        {startTime} - {endTime}
-      </p>
-      <DescriptionWrapper>
-        <p>{description}</p>
-      </DescriptionWrapper>
-
-      <PriceWrapper>
+      <EventDetailsWrapper>
+        <h2>{eventName}</h2>
+        <DateWrapper>
+          <h3>{eventDate}</h3>
+        </DateWrapper>
+        <p>{address}</p>
+        <a href={`http://maps.google.com/?q=${address}`}>Get Directions</a>
         <p>
-          <strong>1 Session:</strong> ${fullPrice}
+          {startTime} - {endTime}
         </p>
-        <p>
-          <strong>3 Sessions:</strong> ${fullPrice * 3 - 60}
-        </p>
-        {privatePrice && (
+        <DescriptionWrapper
+          dangerouslySetInnerHTML={{ __html: eventDescription.remark.html }}
+        />
+        <PriceWrapper>
           <p>
-            <strong>Private:</strong> ${privatePrice}
+            <strong>1 Session:</strong> ${fullPrice}
           </p>
-        )}
-      </PriceWrapper>
-      <PrimaryBtn
-        margin="2rem 0 0 0"
-        variant="secondary"
-        onClick={() =>
-          window.open(`https://www.paypal.com/paypalme/taotekambo`)
-        }
-      >
-        Secure My Spot
-      </PrimaryBtn>
+          <p>
+            <strong>3 Sessions:</strong> ${fullPrice * 3 - 60}
+          </p>
+          {privatePrice > 0 && (
+            <p>
+              <strong>Private:</strong> ${privatePrice}
+            </p>
+          )}
+        </PriceWrapper>
+        <PrimaryBtn
+          margin="2rem 0 0 0"
+          variant="secondary"
+          onClick={() =>
+            window.open(`https://www.paypal.com/paypalme/taotekambo`)
+          }
+        >
+          Secure My Spot
+        </PrimaryBtn>
+      </EventDetailsWrapper>
     </EventWrapper>
   );
 };

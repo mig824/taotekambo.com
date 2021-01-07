@@ -29,28 +29,32 @@ const CeremoniesContainer = styled.div<{ ceremonyCount: number }>`
   width: 80vw;
   max-width: 60em;
   margin-bottom: 4em;
+  justify-content: center;
 
   ${mobileLandscape480} {
     width: 70vw;
   }
 
   ${tabletPortrait768} {
-    width: 60vw;
-  }
-
-  ${tabletLandscape992} {
     grid-template-columns: ${({ ceremonyCount }) =>
-      ceremonyCount < 4 ? `repeat(${ceremonyCount}, 1fr)` : `repeat(3, 1fr)`};
+      ceremonyCount % 2 === 0
+        ? `repeat(${
+            ceremonyCount > 8 ? 4 : ceremonyCount > 2 ? ceremonyCount / 2 : 2
+          }, 1fr)`
+        : `repeat(${ceremonyCount > 1 ? 3 : 1}, 1fr)`};
     width: ${({ ceremonyCount }) => (ceremonyCount > 1 ? `90vw` : `60vw`)};
     gap: 1.5em;
   }
 `;
 
 const CeremoniesPage = ({ data: { ceremonies } }) => {
-  const ceremonyCount = ceremonies.edges.length;
+  const ceremonyCount = ceremonies.nodes.length;
   return (
     <>
-      <SEO title="Ceremonies" />
+      <SEO
+        title="Ceremonies"
+        description="Check out our upcoming kambo ceremonies here."
+      />
       <Header>
         {ceremonyCount ? (
           <h1>
@@ -63,7 +67,7 @@ const CeremoniesPage = ({ data: { ceremonies } }) => {
         )}
       </Header>
       <CeremoniesContainer ceremonyCount={ceremonyCount}>
-        {ceremonies.edges.map(({ node }) => (
+        {ceremonies.nodes.map((node) => (
           <Ceremony ceremonyData={node} key={node.id} />
         ))}
       </CeremoniesContainer>
@@ -73,30 +77,27 @@ const CeremoniesPage = ({ data: { ceremonies } }) => {
 
 export const PageQuery = graphql`
   query CeremoniesPageQuery($date: Date) {
-    ceremonies: allStrapiEvents(
-      filter: { date: { gte: $date } }
-      sort: { fields: date, order: ASC }
+    ceremonies: allContentfulCeremony(
+      filter: { eventDate: { gte: $date } }
+      sort: { fields: eventDate, order: ASC }
     ) {
-      edges {
-        node {
-          id
-          title
-          street
-          city
-          state
-          zipCode
-          date(formatString: "MMMM DD, YYYY")
-          startTime
-          endTime
-          description
-          fullPrice
-          privatePrice
-          eventImage {
-            sharp: childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+      nodes {
+        id
+        eventName
+        address
+        eventDate(formatString: "MMMM DD, YYYY")
+        startTime
+        endTime
+        fullPrice
+        privatePrice
+        eventDescription {
+          remark: childMarkdownRemark {
+            html
+          }
+        }
+        eventImage {
+          fluid {
+            ...GatsbyContentfulFluid_withWebp
           }
         }
       }

@@ -82,9 +82,12 @@ const CheckoutBtnWrapper = styled.div`
   button {
     width: 100%;
     border: none;
+    border-radius: 10px;
+    padding: 0.5em 0;
     background-color: ${darkAccentColor};
     color: ${secondaryColor};
     transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
+    font-size: ${rhythm(0.7)};
 
     &:hover {
       background-color: ${secondaryColorHover};

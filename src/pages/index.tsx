@@ -20,15 +20,17 @@ const H2Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: 100%;
 `;
 
 const UL = styled.ul`
   text-align: left;
   color: ${mainTextColor};
-  padding-left: 25%;
+  padding-left: 1em;
 `;
 
-const HomePage = ({ data: { pageContent, testimonials, site } }) => {
+const HomePage = ({ data: { bannerImg, testimonials, site } }) => {
   useEffect(() => {
     AOS.init({
       duration: 1500,
@@ -40,19 +42,15 @@ const HomePage = ({ data: { pageContent, testimonials, site } }) => {
     <>
       <SEO title="Home" />
       <Banner
-        bannerImg={pageContent.bannerImg.sharp.fluid}
+        bannerImg={bannerImg.sharp.fluid}
         siteTitle={site.siteMetadata.title}
       />
-      <SectionContainer>
+      <SectionContainer noPadding={false}>
         <SectionContentWrapper>
           <H2Wrapper data-aos="fade-right">
             <h2>The Story of Kambo</h2>
           </H2Wrapper>
-          <div
-            data-aos="fade-left"
-            data-aos-delay={700}
-            data-aos-duration={1500}
-          >
+          <div data-aos="fade-left">
             <p>
               The legend of the Kaxinawá says that deep in the jungle a tribe
               fell ill. The local medicine man named Kampu tried to heal the
@@ -122,43 +120,46 @@ const HomePage = ({ data: { pageContent, testimonials, site } }) => {
       <SectionHeader>
         <h2 data-aos="zoom-in-up">Testimonials</h2>
       </SectionHeader>
-      <Testimonials testimonialData={testimonials.edges} />
+      <Testimonials testimonialData={testimonials.nodes} />
       <ScrollTopArrow />
     </>
   );
 };
 
-export const query = graphql`
-  query HomePageQuery {
+export const HomePageQuery = graphql`
+  query {
     site {
       siteMetadata {
         title
       }
     }
-    pageContent: strapiLandingPage {
-      bannerImg {
-        sharp: childImageSharp {
-          fluid(quality: 75, maxHeight: 1440, maxWidth: 2560) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+    bannerImg: file(
+      name: { eq: "frog-on-a-rock" }
+      sourceInstanceName: { eq: "images" }
+    ) {
+      sharp: childImageSharp {
+        fluid(quality: 75, maxHeight: 1440, maxWidth: 2560) {
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }
-    testimonials: allStrapiTestimonials(
-      sort: { order: DESC, fields: personDescription }
+    testimonials: allFile(
+      filter: { sourceInstanceName: { eq: "data" }, extension: { eq: "md" } }
     ) {
-      edges {
-        node {
-          id
-          content
-          personDescription
-          image {
-            childImageSharp {
-              fluid(maxWidth: 90, maxHeight: 90) {
-                ...GatsbyImageSharpFluid_withWebp
+      nodes {
+        remarkNode: childMarkdownRemark {
+          frontmatter {
+            id
+            person
+            image {
+              sharp: childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid_withWebp
+                }
               }
             }
           }
+          html
         }
       }
     }

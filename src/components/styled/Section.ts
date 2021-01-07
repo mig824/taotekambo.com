@@ -9,18 +9,19 @@ import { tabletPortrait768, desktop1200 } from '../../utils/style/breakpoints';
 type SectionContainerProps = {
   marginTop?: string;
   bgColor?: string;
+  noPadding?: boolean;
 };
 
 export const SectionContainer = styled.section<SectionContainerProps>`
   background-color: ${({ bgColor }) => (bgColor ? bgColor : backgroundColor)};
   width: 100%;
-  padding: 2rem 3rem;
+  padding: 2em 3em;
   text-align: center;
   z-index: 2;
   margin-top: ${({ marginTop }) => (marginTop ? marginTop : null)};
 
   ${tabletPortrait768} {
-    padding: 5rem 4rem;
+    padding: ${({ noPadding }) => (noPadding ? null : `5em 4em`)};
   }
 `;
 
@@ -45,6 +46,7 @@ export const SectionContentWrapper = styled.div<SectionWrapperProps>`
     max-width: 70vw;
     margin: auto;
     grid-template-columns: ${({ noCols }) => (noCols ? null : '1fr 1fr')};
+    column-gap: 2em;
 
     .change-order {
       margin: auto;

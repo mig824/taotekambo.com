@@ -115,7 +115,7 @@ const AdditionalResourcesWrapper = styled.div`
   }
 `;
 
-const LearnPage = ({ data: { pageContent } }) => {
+const LearnPage = ({ data: { image } }) => {
   useEffect(() => {
     AOS.init({
       mirror: false,
@@ -126,15 +126,16 @@ const LearnPage = ({ data: { pageContent } }) => {
 
   return (
     <>
-      <SEO title="Learn" />
+      <SEO
+        title="Learn"
+        description="Learn more about the origins of kambo, the science behind it, and how to prepare for a ceremony."
+      />
       <SectionContainer marginTop="3em">
         <H2Wrapper id="kambo" data-aos="zoom-in-down">
           <h2>Kambo</h2>
         </H2Wrapper>
         <AboutWrapper data-aos="fade-left">
-          <ImgWrapper
-            imgSrc={pageContent.kamboInfoImage.sharp.fluid.src}
-          ></ImgWrapper>
+          <ImgWrapper imgSrc={image.sharp.fluid.src}></ImgWrapper>
           <p>
             Kambo is a physical, emotional and spiritual cleanse. Kambo is a
             sacred medicine derived from the Giant Monkey Frog scientifically
@@ -367,14 +368,15 @@ const LearnPage = ({ data: { pageContent } }) => {
   );
 };
 
-export const query = graphql`
-  query LearnPageQuery {
-    pageContent: strapiLearnPage {
-      kamboInfoImage {
-        sharp: childImageSharp {
-          fluid(fit: COVER) {
-            ...GatsbyImageSharpFluid_withWebp
-          }
+export const learnPageQuery = graphql`
+  query {
+    image: file(
+      name: { eq: "frog-on-a-tree" }
+      sourceInstanceName: { eq: "images" }
+    ) {
+      sharp: childImageSharp {
+        fluid(fit: COVER) {
+          src
         }
       }
     }

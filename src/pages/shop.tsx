@@ -45,7 +45,9 @@ const ProductsContainer = styled.div<{ productCount: number }>`
   ${mobileLandscape480} {
     grid-template-columns: ${({ productCount }) =>
       productCount % 2 === 0
-        ? `repeat(${productCount > 6 ? 4 : 2}, 1fr)`
+        ? `repeat(${
+            productCount > 8 ? 4 : productCount > 2 ? productCount / 2 : 2
+          }, 1fr)`
         : `repeat(${productCount > 1 ? 3 : 1}, 1fr)`};
     width: 90vw;
     gap: 1em;
@@ -69,7 +71,10 @@ const ShopPage = ({ data: { products, variants } }) => {
 
   return (
     <>
-      <SEO title="Shop" />
+      <SEO
+        title="Shop"
+        description="Check out what products I have available."
+      />
       <CartContainer>
         <Cart
           variants={variants.nodes}

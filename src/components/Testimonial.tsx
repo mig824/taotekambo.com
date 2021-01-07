@@ -17,36 +17,34 @@ const InfoWrapper = styled.div`
 `;
 
 type TestimonialProps = {
-  testimonial: {
-    image: any;
-    content: string;
-    personDescription: string;
-  };
+  testimonial: any;
   position: string;
 };
 
 const Testimonial: FunctionComponent<TestimonialProps> = ({
-  testimonial: { image, content, personDescription },
+  testimonial: { frontmatter, html },
   position,
-}) => (
-  <div
-    className="testimonial-slide"
-    id={
-      position === 'first'
-        ? 'first-clone'
-        : position === 'last'
-        ? 'last-clone'
-        : null
-    }
-  >
-    <InfoWrapper>
-      <ImgWrapper>
-        <Img fluid={image.childImageSharp.fluid} />
-      </ImgWrapper>
-      <small>{personDescription}</small>
-    </InfoWrapper>
-    <p>{content}</p>
-  </div>
-);
+}) => {
+  return (
+    <div
+      className="testimonial-slide"
+      id={
+        position === 'first'
+          ? 'first-clone'
+          : position === 'last'
+          ? 'last-clone'
+          : null
+      }
+    >
+      <InfoWrapper>
+        <ImgWrapper>
+          <Img fluid={frontmatter?.image.sharp.fluid} />
+        </ImgWrapper>
+        <small>{frontmatter?.person}</small>
+      </InfoWrapper>
+      <div dangerouslySetInnerHTML={{ __html: html }} />
+    </div>
+  );
+};
 
 export default Testimonial;

@@ -1,146 +1,60 @@
 require('dotenv').config();
+const newShopifyQuery = require('./utils/updated-shopify-query');
+
 module.exports = {
   siteMetadata: {
     title: `Tao Te Kambo`,
-    description: `Website for TaoTe Kambo`,
+    description: `All about Tao Te Kambo -- Learn about kambo and how you can attend a ceremony.`,
     author: `Miguel Michel`,
+    companyInfo: {
+      owner: `Scott Polhill`,
+      email: `taotekambo@gmail.com`,
+      phone: `+1 (951) 395 4372`,
+      homebase: `2081 261st St., Lomita, CA 90717`,
+    },
   },
   plugins: [
-    `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `utils`,
-        path: `${__dirname}/src/utils`,
+        name: `images`,
+        path: `${__dirname}/src/utils/assets`,
       },
     },
     {
-      resolve: `gatsby-source-strapi`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        apiURL: process.env.API_URL || `http://localhost:1337`,
-        queryLimit: 1000, // Default to 100
-        singleTypes: ['company-info', 'landing-page', 'learn-page'],
-        contentTypes: ['events', `posts`, 'testimonials'],
+        name: `data`,
+        path: `${__dirname}/src/utils/data`,
       },
     },
     {
-      resolve: 'gatsby-source-shopify',
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_TOKEN,
+      },
+    },
+    {
+      resolve: `gatsby-source-shopify`,
       options: {
         shopName: process.env.SHOPIFY_STORE_NAME,
         accessToken: process.env.SHOPIFY_TOKEN,
-        includeCollections: ['shop'],
+        includeCollections: [`shop`],
         shopifyQueries: {
-          products: `
-            query GetProducts($first: Int!, $after: String) {
-              products(first: $first, after: $after) {
-                pageInfo {
-                  hasNextPage
-                }
-                edges {
-                  cursor
-                  node {
-                    availableForSale
-                    totalInventory
-                    createdAt
-                    description
-                    handle
-                    id
-                    images(first: 250) {
-                      edges {
-                        node {
-                          id
-                          altText
-                          originalSrc
-                        }
-                      }
-                    }
-                    metafields(first: 250) {
-                      edges {
-                        node {
-                          description
-                          id
-                          key
-                          namespace
-                          value
-                          valueType
-                        }
-                      }
-                    }
-                    options {
-                      id
-                      name
-                      values
-                    }
-                    priceRange {
-                      minVariantPrice {
-                        amount
-                        currencyCode
-                      }
-                      maxVariantPrice {
-                        amount
-                        currencyCode
-                      }
-                    }
-                    productType
-                    publishedAt
-                    tags
-                    title
-                    updatedAt
-                    variants(first: 250) {
-                      edges {
-                        node {
-                          availableForSale
-                          quantityAvailable
-                          compareAtPrice
-                          compareAtPriceV2 {
-                            amount
-                            currencyCode
-                          }
-                          id
-                          image {
-                            altText
-                            id
-                            originalSrc
-                          }
-                          metafields(first: 250) {
-                            edges {
-                              node {
-                                description
-                                id
-                                key
-                                namespace
-                                value
-                                valueType
-                              }
-                            }
-                          }
-                          price
-                          priceV2 {
-                            amount
-                            currencyCode
-                          }
-                          requiresShipping
-                          selectedOptions {
-                            name
-                            value
-                          }
-                          sku
-                          title
-                          weight
-                          weightUnit
-                        }
-                      }
-                    }
-                    vendor
-                  }
-                }
-              }
-            }
-          `,
+          products: newShopifyQuery,
         },
       },
     },
+    {
+      resolve: `gatsby-source-instagram`,
+      options: {
+        username: `3619554129`,
+      },
+    },
     `gatsby-transformer-sharp`,
+    `gatsby-transformer-remark`,
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-anchor-links`,
     `gatsby-plugin-webpack-bundle-analyser-v2`,
@@ -153,7 +67,12 @@ module.exports = {
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {
-        allowList: [`SHOPIFY_TOKEN`, `SHOPIFY_STORE_NAME`, `API_URL`],
+        allowList: [
+          `SHOPIFY_TOKEN`,
+          `SHOPIFY_STORE_NAME`,
+          `CONTENTFUL_SPACE_ID`,
+          `CONTENTFUL_TOKEN`,
+        ],
       },
     },
     {
@@ -162,8 +81,8 @@ module.exports = {
         name: `Tao Te Kambo`,
         short_name: `Tao Te Kambo`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#2f4f4f`,
+        theme_color: `#2f4f4f`,
         display: `minimal-ui`,
         icon: `src/utils/assets/favicon.png`,
       },
@@ -174,8 +93,6 @@ module.exports = {
         pathToConfigModule: 'src/utils/style/typography',
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 };

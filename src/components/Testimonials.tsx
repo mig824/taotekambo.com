@@ -140,18 +140,25 @@ const Testimonials = ({ testimonialData }) => {
         }}
       >
         <Testimonial
-          testimonial={testimonialData[testimonialData.length - 1].node}
-          key={`${testimonialData[testimonialData.length - 1].node.id}-clone`}
+          testimonial={testimonialData[testimonialData.length - 1].remarkNode}
+          key={`${
+            testimonialData[testimonialData.length - 1].remarkNode.frontmatter
+              .id
+          }-clone`}
           position="first"
         />
-        {testimonialData?.map(({ node }) => {
+        {testimonialData?.map(({ remarkNode }) => {
           return (
-            <Testimonial testimonial={node} key={node.id} position="middle" />
+            <Testimonial
+              testimonial={remarkNode}
+              key={remarkNode.frontmatter.id}
+              position="middle"
+            />
           );
         })}
         <Testimonial
-          testimonial={testimonialData[0].node}
-          key={`${testimonialData[0].node.id}-clone`}
+          testimonial={testimonialData[0].remarkNode}
+          key={`${testimonialData[0].remarkNode.frontmatter.id}-clone`}
           position="last"
         />
       </SlideContainer>

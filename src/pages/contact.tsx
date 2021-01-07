@@ -6,10 +6,7 @@ import SEO from '../components/SEO';
 import Map from '../components/Map';
 import { PrimaryBtn } from '../components/styled/Button';
 import { SectionContainer } from '../components/styled/Section';
-import {
-  mobileLandscape480,
-  tabletPortrait768,
-} from '../utils/style/breakpoints';
+import { mobileLandscape480 } from '../utils/style/breakpoints';
 
 const ContactContentWrapper = styled.div`
   display: flex;
@@ -17,20 +14,10 @@ const ContactContentWrapper = styled.div`
   max-width: 70em;
   width: 100%;
   margin: auto;
-
-  /* #text-wrapper {
-    width: 100
-  } */
-
-  /* ${tabletPortrait768} {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-  } */
 `;
 
 const MapWrapper = styled.div`
-  margin: 2em auto 0 auto;
-  max-width: 60em;
+  margin-top: 2em;
   width: 100%;
   height: 18em;
   border-radius: 10px;
@@ -46,24 +33,25 @@ const MapWrapper = styled.div`
   }
 `;
 
-const ContactPage = ({
-  data: {
-    info: { address, email, phoneNumber },
-  },
-}) => {
+const ContactPage = ({ data: { site } }) => {
+  const { homebase, email, phone } = site.siteMetadata.companyInfo;
+
   return (
     <>
-      <SEO title="Contact" />
+      <SEO
+        title="Contact"
+        description="Who is Tao Te Kambo and how to get in contact"
+      />
       <SectionContainer marginTop="5.2em">
         <ContactContentWrapper>
           <div id="text-wrapper">
             <h1>Contact</h1>
             <h3>Phone</h3>
-            <p>+1 {phoneNumber}</p>
+            <p>+1 {phone}</p>
             <h3>Email</h3>
             <p>{email}</p>
             <h3>Homebase</h3>
-            <p>{address}</p>
+            <p>{homebase}</p>
             <PrimaryBtn
               margin="2rem 0 0 0"
               variant="primary"
@@ -79,7 +67,7 @@ const ContactPage = ({
                 zoom={13}
                 scrollWheelZoom={true}
                 markerPosition={[33.78646, -118.31684]}
-                address={address}
+                address={homebase}
               />
             </MapWrapper>
           ) : null}
@@ -89,12 +77,16 @@ const ContactPage = ({
   );
 };
 
-export const query = graphql`
-  query CompanyPageQuery {
-    info: strapiCompanyInfo {
-      address
-      phoneNumber
-      email
+export const ContactPageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        companyInfo {
+          homebase
+          email
+          phone
+        }
+      }
     }
   }
 `;

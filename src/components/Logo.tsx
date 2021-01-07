@@ -3,21 +3,19 @@ import { useStaticQuery, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
 const Logo = () => {
-  const { companyInfo } = useStaticQuery(graphql`
-    query strapiLogoQuery {
-      companyInfo: strapiCompanyInfo {
-        logo {
-          sharp: childImageSharp {
-            fluid(maxWidth: 45, maxHeight: 45, fit: CONTAIN) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
+  const { file } = useStaticQuery(graphql`
+    query LogoQuery {
+      file(name: { eq: "taotelogo" }, sourceInstanceName: { eq: "images" }) {
+        sharp: childImageSharp {
+          fluid(maxWidth: 45, maxHeight: 45, fit: CONTAIN) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
     }
   `);
 
-  return <Img fluid={companyInfo.logo.sharp.fluid} />;
+  return <Img fluid={file.sharp.fluid} />;
 };
 
 export default Logo;
