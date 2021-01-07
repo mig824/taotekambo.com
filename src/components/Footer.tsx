@@ -7,7 +7,7 @@ import { rhythm } from '../utils/style/typography';
 
 const FooterCSS = styled.footer`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   position: absolute;
   bottom: 0;

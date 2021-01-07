@@ -6,7 +6,6 @@ import SEO from '../components/SEO';
 import Ceremony from '../components/Ceremony';
 import {
   mobileLandscape480,
-  tabletLandscape992,
   tabletPortrait768,
 } from '../utils/style/breakpoints';
 
@@ -77,26 +76,26 @@ const CeremoniesPage = ({ data: { ceremonies } }) => {
 
 export const PageQuery = graphql`
   query CeremoniesPageQuery($date: Date) {
-    ceremonies: allContentfulCeremony(
-      filter: { eventDate: { gte: $date } }
-      sort: { fields: eventDate, order: ASC }
+    ceremonies: allContentfulEvent(
+      filter: { date: { gte: $date } }
+      sort: { fields: date, order: ASC }
     ) {
       nodes {
         id
-        eventName
-        address
-        eventDate(formatString: "MMMM DD, YYYY")
-        startTime
-        endTime
-        fullPrice
+        name
+        location
+        date(formatString: "MMMM DD, YYYY")
+        start
+        end
+        price
         privatePrice
-        eventDescription {
+        description {
           remark: childMarkdownRemark {
             html
           }
         }
-        eventImage {
-          fluid {
+        image {
+          fluid(maxWidth: 500, maxHeight: 492) {
             ...GatsbyContentfulFluid_withWebp
           }
         }

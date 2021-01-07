@@ -237,6 +237,9 @@ const NavBar = () => {
               learnLinkRef={learnLinkRef}
             />
           )}
+          <Link to="/ceremonies">
+            <li>Ceremonies</li>
+          </Link>
           <Link to="/social">
             <li>Social</li>
           </Link>
@@ -245,9 +248,6 @@ const NavBar = () => {
           </Link>
           <Link to="/contact">
             <li>Contact</li>
-          </Link>
-          <Link to="/ceremonies">
-            <li>Ceremonies</li>
           </Link>
         </ul>
       </LinksDiv>

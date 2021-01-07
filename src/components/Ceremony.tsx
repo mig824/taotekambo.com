@@ -108,41 +108,41 @@ const PriceWrapper = styled.div`
 
 const Ceremony = ({
   ceremonyData: {
-    eventName,
-    address,
-    eventDate,
-    eventDescription,
-    eventImage,
-    startTime,
-    endTime,
-    fullPrice,
+    name,
+    location,
+    date,
+    description,
+    image,
+    start,
+    end,
+    price,
     privatePrice,
   },
 }) => {
   return (
     <EventWrapper>
       <ImageWrapper>
-        <Img fluid={eventImage.fluid} />
+        <Img fluid={image.fluid} />
       </ImageWrapper>
       <EventDetailsWrapper>
-        <h2>{eventName}</h2>
+        <h2>{name}</h2>
         <DateWrapper>
-          <h3>{eventDate}</h3>
+          <h3>{date}</h3>
         </DateWrapper>
-        <p>{address}</p>
-        <a href={`http://maps.google.com/?q=${address}`}>Get Directions</a>
+        <p>{location}</p>
+        <a href={`http://maps.google.com/?q=${location}`}>Get Directions</a>
         <p>
-          {startTime} - {endTime}
+          {start} - {end}
         </p>
         <DescriptionWrapper
-          dangerouslySetInnerHTML={{ __html: eventDescription.remark.html }}
+          dangerouslySetInnerHTML={{ __html: description.remark.html }}
         />
         <PriceWrapper>
           <p>
-            <strong>1 Session:</strong> ${fullPrice}
+            <strong>1 Session:</strong> ${price}
           </p>
           <p>
-            <strong>3 Sessions:</strong> ${fullPrice * 3 - 60}
+            <strong>3 Sessions:</strong> ${price * 3 - 60}
           </p>
           {privatePrice > 0 && (
             <p>

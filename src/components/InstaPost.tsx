@@ -21,7 +21,7 @@ const PostWrapper = styled.div`
     padding: 0.5em;
     font-size: ${rhythm(0.5)};
     width: 10rem;
-    height: 10rem;
+    height: 20rem;
     z-index: 15;
     overflow-y: scroll;
     border-radius: 5px;
@@ -38,9 +38,8 @@ const PostWrapper = styled.div`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: ${primaryColor};
+      background-color: ${`#555`};
       border-radius: 20px;
-      border: 2px solid ${secondaryColor};
     }
 
     ${mobileLandscape480} {
@@ -82,6 +81,7 @@ const CaptionBtn = styled.button<{ isActive: boolean }>`
   background-color: ${({ isActive }) =>
     isActive ? secondaryColor : darkAccentColor};
   color: ${({ isActive }) => (isActive ? darkAccentColor : mainTextColor)};
+  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 
   svg {
     margin: auto;
@@ -89,6 +89,8 @@ const CaptionBtn = styled.button<{ isActive: boolean }>`
 
   &:hover {
     cursor: pointer;
+    color: ${darkAccentColor};
+    background-color: ${secondaryColor};
   }
 
   ${mobileLandscape480} {
