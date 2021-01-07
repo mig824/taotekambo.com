@@ -57,7 +57,7 @@ module.exports = {
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-anchor-links`,
-    `gatsby-plugin-webpack-bundle-analyser-v2`,
+    // `gatsby-plugin-webpack-bundle-analyser-v2`,
     {
       resolve: `gatsby-plugin-react-leaflet`,
       options: {
