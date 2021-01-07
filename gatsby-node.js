@@ -1,5 +1,5 @@
 exports.onCreatePage = ({ page, actions: { createPage, deletePage } }) => {
-  if (page.path === '/ceremonies/') {
+  if (page.path === `/ceremonies/`) {
     const date = new Date();
     const year = date.getFullYear();
     let month = date.getMonth().toString();
@@ -27,18 +27,17 @@ exports.onCreatePage = ({ page, actions: { createPage, deletePage } }) => {
 };
 
 exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
-  switch (stage) {
-    case 'build-html':
-      actions.setWebpackConfig({
-        module: {
-          rules: [
-            {
-              test: /react-leaflet|leaflet/,
-              use: [loaders.null()],
-            },
-          ],
-        },
-      });
-      break;
+  if (stage === `build-html` || stage === `develop-html`) {
+    const regex = [/node_modules\/leaflet/, /node_modules\\leaflet/];
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: regex,
+            use: loaders.null(),
+          },
+        ],
+      },
+    });
   }
 };

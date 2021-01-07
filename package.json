@@ -1,5 +1,5 @@
 {
-  "name": "tao-te-kambo",
+  "name": "ttk",
   "private": true,
   "description": "A website for Tao Te Kambo",
   "version": "0.1.0",
@@ -17,7 +17,6 @@
     "gatsby-plugin-manifest": "^2.5.2",
     "gatsby-plugin-offline": "^3.3.3",
     "gatsby-plugin-react-helmet": "^3.3.14",
-    "gatsby-plugin-react-leaflet": "^2.0.13",
     "gatsby-plugin-sharp": "^2.12.0",
     "gatsby-plugin-typography": "^2.6.0",
     "gatsby-source-contentful": "^4.4.0",

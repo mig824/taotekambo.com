@@ -47,7 +47,7 @@ const ContactPage = ({ data: { site } }) => {
           <div id="text-wrapper">
             <h1>Contact</h1>
             <h3>Phone</h3>
-            <p>+1 {phone}</p>
+            <p>{phone}</p>
             <h3>Email</h3>
             <p>{email}</p>
             <h3>Homebase</h3>

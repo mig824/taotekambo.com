@@ -59,12 +59,6 @@ module.exports = {
     `gatsby-plugin-anchor-links`,
     // `gatsby-plugin-webpack-bundle-analyser-v2`,
     {
-      resolve: `gatsby-plugin-react-leaflet`,
-      options: {
-        linkStyles: true,
-      },
-    },
-    {
       resolve: `gatsby-plugin-env-variables`,
       options: {
         allowList: [
