@@ -23,13 +23,13 @@ const Header = styled.div`
 `;
 
 const ContentContainer = styled.div`
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: fit-content;
   align-items: center;
   justify-content: center;
-  gap: 2em;
+  gap: 1rem;
 
   ${tabletPortrait768} {
     grid-template-columns: 1fr 1fr 1fr;

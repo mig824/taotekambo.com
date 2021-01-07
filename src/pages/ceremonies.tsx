@@ -22,9 +22,8 @@ const Header = styled.div`
 `;
 
 const CeremoniesContainer = styled.div<{ ceremonyCount: number }>`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2em;
+  display: flex;
+  flex-direction: column;
   width: 80vw;
   max-width: 60em;
   margin-bottom: 4em;
@@ -35,13 +34,14 @@ const CeremoniesContainer = styled.div<{ ceremonyCount: number }>`
   }
 
   ${tabletPortrait768} {
+    display: grid;
     grid-template-columns: ${({ ceremonyCount }) =>
       ceremonyCount % 2 === 0
         ? `repeat(${
             ceremonyCount > 8 ? 4 : ceremonyCount > 2 ? ceremonyCount / 2 : 2
           }, 1fr)`
         : `repeat(${ceremonyCount > 1 ? 3 : 1}, 1fr)`};
-    width: ${({ ceremonyCount }) => (ceremonyCount > 1 ? `90vw` : `60vw`)};
+    width: ${({ ceremonyCount }) => (ceremonyCount > 1 ? `90vw` : `35rem`)};
     gap: 1.5em;
   }
 `;

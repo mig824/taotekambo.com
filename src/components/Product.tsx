@@ -13,12 +13,18 @@ import {
 const ProductWrapper = styled.div`
   border: solid 1px ${secondaryColor};
   border-radius: 10px;
+  margin-bottom: 1.5rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   box-shadow: 0 0 4px 3px #222;
   max-width: 500px;
-  height: 100%;
+  /* height: fit-content; */
+
+  ${mobileLandscape480} {
+    height: 100%;
+    margin: 0;
+  }
 `;
 
 const ImgWrapper = styled.div`

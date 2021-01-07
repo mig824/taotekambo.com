@@ -6,8 +6,8 @@ import { mainTextColor } from '../utils/style/colorscheme';
 const ScrollUpBtn = styled.button<{ showScroll: boolean }>`
   display: ${({ showScroll }) => (showScroll ? `flex` : `none`)};
   position: fixed;
-  width: 3em;
-  height: 3em;
+  width: 3rem;
+  height: 3rem;
   right: 4%;
   bottom: 4%;
   align-items: center;
@@ -35,8 +35,8 @@ const ScrollUpBtn = styled.button<{ showScroll: boolean }>`
   }
 
   svg {
-    width: 2em;
-    height: 2em;
+    width: 2rem;
+    height: 2rem;
   }
 `;
 

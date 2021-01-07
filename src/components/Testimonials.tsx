@@ -25,7 +25,7 @@ const PrevBtn = styled.button`
   position: absolute;
   top: 50%;
   z-index: 10;
-  left: 0.5rem;
+  left: 0;
   font-size: 2rem;
   color: #fff;
   opacity: 0.8;
@@ -47,7 +47,7 @@ const NextBtn = styled.button`
   position: absolute;
   top: 50%;
   z-index: 10;
-  right: 0.5rem;
+  right: 0;
   font-size: 2rem;
   color: #fff;
   opacity: 0.8;
@@ -96,7 +96,7 @@ const Testimonials = ({ testimonialData }) => {
       display: flex;
       flex-wrap: wrap;
       min-width: ${width}px;
-      height: 500px;
+      /* height: 500px; */
       transition: ${nextSlide ? 'transform 1.5s ease-in-out' : 'none'};
       transform: translateX(-${width * count}px);
       padding: 2rem;

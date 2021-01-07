@@ -3,7 +3,10 @@ import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 import { GoQuote } from 'react-icons/go';
 
-import { mobileLandscape480 } from '../utils/style/breakpoints';
+import {
+  mobileLandscape480,
+  tabletLandscape992,
+} from '../utils/style/breakpoints';
 import {
   darkAccentColor,
   mainTextColor,
@@ -67,13 +70,14 @@ const ImgWrapper = styled.div`
 
 const CaptionBtn = styled.button<{ isActive: boolean }>`
   position: absolute;
+  /* display: none; */
   display: flex;
   justify-content: center;
   top: 5%;
   right: 5%;
   z-index: 10;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1.6rem;
+  height: 1.6rem;
   font-size: ${rhythm(0.9)};
   border-radius: 50%;
   border: 1px solid
@@ -94,8 +98,12 @@ const CaptionBtn = styled.button<{ isActive: boolean }>`
   }
 
   ${mobileLandscape480} {
-    width: 1.5em;
-    height: 1.5em;
+    width: 2rem;
+    height: 2rem;
+  }
+  ${tabletLandscape992} {
+    display: flex;
+    justify-content: center;
   }
 `;
 

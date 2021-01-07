@@ -35,14 +35,14 @@ const CartContainer = styled.div`
 `;
 
 const ProductsContainer = styled.div<{ productCount: number }>`
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 3em;
-  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
   max-width: 600px;
-  margin-bottom: 4em;
+  margin-bottom: 4rem;
 
   ${mobileLandscape480} {
+    display: grid;
     grid-template-columns: ${({ productCount }) =>
       productCount % 2 === 0
         ? `repeat(${
@@ -50,11 +50,7 @@ const ProductsContainer = styled.div<{ productCount: number }>`
           }, 1fr)`
         : `repeat(${productCount > 1 ? 3 : 1}, 1fr)`};
     width: 90vw;
-    gap: 1em;
-  }
-
-  ${tabletPortrait768} {
-    gap: 2em;
+    gap: 1rem;
   }
 `;
 

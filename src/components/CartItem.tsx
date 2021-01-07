@@ -77,6 +77,10 @@ const ImgWrapper = styled.div`
 `;
 
 const QuantityWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -108,6 +112,7 @@ const QuantityWrapper = styled.div`
   ${mobileLandscape480} {
     button {
       font-size: ${rhythm(0.65)};
+      padding: 0 1rem;
     }
   }
 

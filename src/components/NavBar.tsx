@@ -59,6 +59,7 @@ const NavCSS = styled.nav`
 
     a {
       display: flex;
+      flex-wrap: nowrap;
       align-items: center;
       padding: 0.2em 0.5em;
     }
