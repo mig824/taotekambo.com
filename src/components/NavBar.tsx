@@ -49,23 +49,24 @@ const NavCSS = styled.nav`
     position: absolute;
     top: 6em;
     width: fit-content;
-    min-width: 50px;
+    /* min-width: 50px; */
     transform: translateX(-38%);
     background-color: ${backgroundColor};
     border: 1px solid ${secondaryColor};
     box-shadow: 0 -3px 6px 1px ${darkAccentColor};
     border-radius: 8px;
-    padding: 0 1em;
+    padding: 0 1rem;
 
     a {
       display: flex;
       flex-wrap: nowrap;
       align-items: center;
-      padding: 0.2em 0.5em;
+      justify-content: center;
+      padding: 0.2rem 0.5rem;
     }
 
     ${tabletPortrait768} {
-      top: 3.9em;
+      top: 3.9rem;
     }
   }
 

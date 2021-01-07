@@ -19,13 +19,15 @@ import {
 
 const ItemWrapper = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 2fr;
+  justify-items: center;
   align-items: center;
   text-align: center;
   padding: 1em 0;
 
   #item-name-and-image {
     display: flex;
+    justify-self: flex-start;
 
     #item-name {
       display: flex;
@@ -79,7 +81,7 @@ const ImgWrapper = styled.div`
 const QuantityWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  flex-wrap: nowrap;
+  align-items: center;
 
   input::-webkit-outer-spin-button,
   input::-webkit-inner-spin-button {
@@ -89,23 +91,32 @@ const QuantityWrapper = styled.div`
 
   input {
     -moz-appearance: textfield;
-    width: 35%;
-    margin: auto;
     text-align: center;
     color: ${secondaryColor};
     background-color: transparent;
     border: none;
     font-size: ${rhythm(0.75)};
+    z-index: 5;
   }
 
   button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: ${secondaryColor};
     background-color: transparent;
     border: none;
     font-size: ${rhythm(0.55)};
+    width: 1rem;
+    height: 1rem;
 
     &:hover {
       cursor: pointer;
+    }
+
+    .icon {
+      margin: auto;
+      padding: auto;
     }
   }
 
@@ -183,7 +194,9 @@ const CartItem: FunctionComponent<CartItemProps> = ({
       <p>{`$${Number(item.variant.priceV2.amount).toFixed(2)}`}</p>
       <QuantityWrapper>
         <button onClick={() => handleDecrement()}>
-          <MdRemove />
+          <span className="icon">
+            <MdRemove />
+          </span>
         </button>
         <input
           type="number"
@@ -194,7 +207,9 @@ const CartItem: FunctionComponent<CartItemProps> = ({
           disabled={true}
         />
         <button onClick={() => handleIncrement()}>
-          <MdAdd />
+          <span className="icon">
+            <MdAdd />
+          </span>
         </button>
       </QuantityWrapper>
     </ItemWrapper>

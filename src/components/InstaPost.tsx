@@ -70,9 +70,9 @@ const ImgWrapper = styled.div`
 
 const CaptionBtn = styled.button<{ isActive: boolean }>`
   position: absolute;
-  /* display: none; */
-  display: flex;
-  justify-content: center;
+  display: none;
+  /* display: flex;
+  justify-content: center; */
   top: 5%;
   right: 5%;
   z-index: 10;

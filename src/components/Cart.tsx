@@ -71,7 +71,7 @@ const CartContainer = styled.div`
 
 const CartContentHeader = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 2fr;
   text-align: center;
   border-bottom: white 1px solid;
 `;

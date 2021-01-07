@@ -2,12 +2,13 @@ import React, { FC, useState, useEffect } from 'react';
 import styled from '@emotion/styled';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { mainTextColor } from '../utils/style/colorscheme';
+import { desktop1200 } from '../utils/style/breakpoints';
 
 const ScrollUpBtn = styled.button<{ showScroll: boolean }>`
   display: ${({ showScroll }) => (showScroll ? `flex` : `none`)};
   position: fixed;
-  width: 3rem;
-  height: 3rem;
+  width: 4rem;
+  height: 4rem;
   right: 4%;
   bottom: 4%;
   align-items: center;
@@ -35,8 +36,13 @@ const ScrollUpBtn = styled.button<{ showScroll: boolean }>`
   }
 
   svg {
-    width: 2rem;
-    height: 2rem;
+    width: 3rem;
+    height: 3rem;
+  }
+
+  ${desktop1200} {
+    width: 3rem;
+    height: 3rem;
   }
 `;
 
