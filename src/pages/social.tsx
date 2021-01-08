@@ -60,22 +60,22 @@ const SocialPage = ({ data: { insta } }) => {
   );
 };
 
-export const SocialPageQuery = graphql`
-  query {
-    insta: allInstaNode(limit: 18, sort: { fields: timestamp, order: DESC }) {
-      nodes {
-        id
-        caption
-        image: localFile {
-          sharp: childImageSharp {
-            fluid(maxWidth: 200, maxHeight: 200) {
-              ...GatsbyImageSharpFluid_withWebp
-            }
-          }
-        }
-      }
-    }
-  }
-`;
+// export const SocialPageQuery = graphql`
+//   query {
+//     insta: allInstaNode(limit: 18, sort: { fields: timestamp, order: DESC }) {
+//       nodes {
+//         id
+//         caption
+//         image: localFile {
+//           sharp: childImageSharp {
+//             fluid(maxWidth: 200, maxHeight: 200) {
+//               ...GatsbyImageSharpFluid_withWebp
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;
 
-export default SocialPage;
+// export default SocialPage;

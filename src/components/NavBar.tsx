@@ -242,9 +242,9 @@ const NavBar = () => {
           <Link to="/ceremonies">
             <li>Ceremonies</li>
           </Link>
-          <Link to="/social">
+          {/* <Link to="/social">
             <li>Social</li>
-          </Link>
+          </Link> */}
           <Link to="/shop">
             <li>Shop</li>
           </Link>
