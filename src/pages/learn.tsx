@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { graphql } from 'gatsby';
+import BackgroundImage from 'gatsby-background-image';
 import styled from '@emotion/styled';
 import AOS from 'aos';
 
@@ -23,10 +24,8 @@ import {
   tabletLandscape992,
 } from '../utils/style/breakpoints';
 
-const ImgWrapper = styled.div<{ imgSrc: any }>`
-  background-image: ${({ imgSrc }) => `url(${imgSrc})`};
-  background-size: cover;
-  background-position: top center;
+const Img = styled(BackgroundImage)`
+  overflow: hidden;
   margin: 0 1rem 1rem 0;
   height: 10rem;
   width: 10rem;
@@ -135,7 +134,7 @@ const LearnPage = ({ data: { image } }) => {
           <h2>Kambo</h2>
         </H2Wrapper>
         <AboutWrapper data-aos="fade-left">
-          <ImgWrapper imgSrc={image.sharp.fluid.src}></ImgWrapper>
+          <Img Tag="div" fluid={image.sharp.fluid} />
           <p>
             Kambo is a physical, emotional and spiritual cleanse. Kambo is a
             sacred medicine derived from the Giant Monkey Frog scientifically

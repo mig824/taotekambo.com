@@ -12,6 +12,7 @@ import { PrimaryBtn } from './styled/Button';
 import {
   mobileLandscape480,
   tabletLandscape992,
+  tabletPortrait768,
 } from '../utils/style/breakpoints';
 
 const EventWrapper = styled.div`
@@ -20,6 +21,7 @@ const EventWrapper = styled.div`
   border: 1px solid ${secondaryColor};
   box-shadow: 0 0 18px 5px #222;
   overflow: hidden;
+  margin-bottom: 2rem;
 
   p {
     margin: 1rem 0 -0.5em 0;
@@ -31,6 +33,10 @@ const EventWrapper = styled.div`
     &:hover {
       color: ${secondaryColorHover};
     }
+  }
+
+  ${tabletPortrait768} {
+    margin: 0;
   }
 
   ${tabletLandscape992} {
@@ -46,7 +52,7 @@ const EventWrapper = styled.div`
 `;
 
 const ImageWrapper = styled.div`
-  height: 14em;
+  height: 14rem;
   width: 100%;
   margin-top: -2em;
   overflow: hidden;

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Img from 'gatsby-image';
+import BackgroundImg from 'gatsby-background-image';
 import styled from '@emotion/styled';
 import { MdAddShoppingCart } from 'react-icons/md';
 
@@ -14,37 +14,43 @@ const ProductWrapper = styled.div`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-width: 500px;
+  width: 100%;
   margin-bottom: 1.5rem;
   border: solid 1px ${secondaryColor};
   border-radius: 10px;
   box-shadow: 0 0 4px 3px #222;
-  max-height: fit-content;
-  /* height: fit-content; */
+  height: fit-content;
 
   ${mobileLandscape480} {
-    height: 100%;
-    margin: 0;
+    flex-direction: row;
   }
 `;
 
-const ImgWrapper = styled.div`
-  max-width: 30em;
-  width: 50%;
+const Img = styled(BackgroundImg)`
   margin: auto;
-
-  ${mobileLandscape480} {
-    width: 100%;
-  }
+  border-radius: 10px;
+  overflow: hidden;
+  justify-self: center;
+  width: 100%;
+  height: 20rem;
 `;
 
 const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   height: 100%;
   max-width: 1000px;
+  width: 100%;
   text-align: center;
+  margin: auto;
+  height: 20rem;
+  padding: 1rem;
+
+  h3 {
+    margin: 1rem 0;
+  }
 
   .price {
     margin: ${rhythm(0.5)} 0;
@@ -66,11 +72,14 @@ const SmallText = styled.small<{ isAvailable: boolean }>`
 `;
 
 const AddToCartBtn = styled.button`
-  width: 100%;
+  width: 80%;
+  max-width: 12rem;
+  min-width: fit-content;
   font-size: ${rhythm(1)};
   background-color: ${primaryColor};
   color: ${secondaryColor};
   border: none;
+  border-radius: 5px;
   outline: none;
   transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
 
@@ -97,9 +106,7 @@ const Product = ({
 
   return (
     <ProductWrapper>
-      <ImgWrapper>
-        <Img fluid={images[0].localFile.sharp.fluid} />
-      </ImgWrapper>
+      <Img Tag="div" fluid={images[0].localFile.sharp.fluid} />
       <DetailsWrapper>
         <h3>{title}</h3>
         {variants.length > 1 && (
@@ -133,16 +140,16 @@ const Product = ({
         )}
         <hr />
         <p>{description}</p>
+        <AddToCartBtn
+          onClick={() => {
+            if (selectedVariant.availableForSale) {
+              addToCart(selectedVariant.shopifyId, 1);
+            }
+          }}
+        >
+          <MdAddShoppingCart />
+        </AddToCartBtn>
       </DetailsWrapper>
-      <AddToCartBtn
-        onClick={() => {
-          if (selectedVariant.availableForSale) {
-            addToCart(selectedVariant.shopifyId, 1);
-          }
-        }}
-      >
-        <MdAddShoppingCart />
-      </AddToCartBtn>
     </ProductWrapper>
   );
 };

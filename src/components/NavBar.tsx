@@ -62,7 +62,7 @@ const NavCSS = styled.nav`
       align-items: center;
       justify-content: center;
       padding: 0.2rem 0.5rem;
-      width: 8rem;
+      width: 9rem;
     }
 
     ${tabletPortrait768} {

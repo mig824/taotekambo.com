@@ -37,20 +37,14 @@ const CartContainer = styled.div`
 const ProductsContainer = styled.div<{ productCount: number }>`
   display: flex;
   flex-direction: column;
-  width: 90%;
+  width: 80vw;
   max-width: 600px;
   margin-bottom: 4rem;
 
   ${mobileLandscape480} {
-    display: grid;
-    grid-template-columns: ${({ productCount }) =>
-      productCount % 2 === 0
-        ? `repeat(${
-            productCount > 8 ? 4 : productCount > 2 ? productCount / 2 : 2
-          }, 1fr)`
-        : `repeat(${productCount > 1 ? 3 : 1}, 1fr)`};
+    justify-content: center;
+    align-items: center;
     width: 90vw;
-    gap: 1rem;
   }
 `;
 
@@ -119,7 +113,7 @@ export const query = graphql`
         images {
           localFile {
             sharp: childImageSharp {
-              fluid {
+              fluid(maxWidth: 450, maxHeight: 450) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
@@ -134,7 +128,7 @@ export const query = graphql`
         image {
           localFile {
             sharp: childImageSharp {
-              fluid(fit: CONTAIN) {
+              fluid(fit: CONTAIN, maxWidth: 50, maxHeight: 50) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
