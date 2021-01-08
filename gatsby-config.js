@@ -46,12 +46,12 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-source-instagram`,
-      options: {
-        username: `3619554129`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-instagram`,
+    //   options: {
+    //     username: `3619554129`,
+    //   },
+    // },
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-react-helmet`,
