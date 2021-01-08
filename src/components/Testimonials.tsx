@@ -23,6 +23,9 @@ const SlideContainer = styled.div`
 
 const PrevBtn = styled.button`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 50%;
   z-index: 10;
   left: 0;
@@ -33,6 +36,12 @@ const PrevBtn = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  width: 2rem;
+
+  .icon {
+    margin: auto;
+    padding: auto;
+  }
 
   &:hover {
     opacity: 1;
@@ -45,6 +54,9 @@ const PrevBtn = styled.button`
 
 const NextBtn = styled.button`
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: 50%;
   z-index: 10;
   right: 0;
@@ -55,9 +67,15 @@ const NextBtn = styled.button`
   background: transparent;
   border: none;
   outline: none;
+  width: 2rem;
 
   &:hover {
     opacity: 1;
+  }
+
+  .icon {
+    margin: auto;
+    padding: auto;
   }
 
   ${tabletPortrait768} {
@@ -96,10 +114,9 @@ const Testimonials = ({ testimonialData }) => {
       display: flex;
       flex-wrap: wrap;
       min-width: ${width}px;
-      /* height: 500px; */
       transition: ${nextSlide ? 'transform 1.5s ease-in-out' : 'none'};
       transform: translateX(-${width * count}px);
-      padding: 2rem;
+      padding: 2.2rem;
 
       img {
         border-radius: 50%;
@@ -123,7 +140,9 @@ const Testimonials = ({ testimonialData }) => {
           setCount(count - 1);
         }}
       >
-        <FaAngleLeft />
+        <span className="icon">
+          <FaAngleLeft />
+        </span>
       </PrevBtn>
       <SlideContainer
         ref={containerRef}
@@ -169,7 +188,9 @@ const Testimonials = ({ testimonialData }) => {
           setCount(count + 1);
         }}
       >
-        <FaAngleRight />
+        <span className="icon">
+          <FaAngleRight />
+        </span>
       </NextBtn>
     </div>
   );

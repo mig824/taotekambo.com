@@ -49,7 +49,6 @@ const NavCSS = styled.nav`
     position: absolute;
     top: 6em;
     width: fit-content;
-    /* min-width: 50px; */
     transform: translateX(-38%);
     background-color: ${backgroundColor};
     border: 1px solid ${secondaryColor};
@@ -63,6 +62,7 @@ const NavCSS = styled.nav`
       align-items: center;
       justify-content: center;
       padding: 0.2rem 0.5rem;
+      width: 8rem;
     }
 
     ${tabletPortrait768} {
