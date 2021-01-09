@@ -127,6 +127,11 @@ const LogoDiv = styled.div`
   max-width: 45px;
   margin: 0 auto 0.5em auto;
   order: -1;
+  transition: transform 0.4s ease-in-out;
+
+  &:hover {
+    transform: rotate(-360deg);
+  }
 
   a {
     width: 100%;

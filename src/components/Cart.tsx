@@ -14,7 +14,10 @@ import { rhythm } from '../utils/style/typography';
 import { tabletPortrait768 } from '../utils/style/breakpoints';
 
 const CartButton = styled.button<{ isActive: boolean }>`
-  margin: 1em 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.4rem;
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -29,6 +32,11 @@ const CartButton = styled.button<{ isActive: boolean }>`
     background-color: ${secondaryColorHover};
     color: ${darkAccentColor};
     cursor: pointer;
+  }
+
+  #cart-icon {
+    padding: auto;
+    margin: auto;
   }
 
   ${tabletPortrait768} {

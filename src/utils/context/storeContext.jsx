@@ -48,13 +48,13 @@ const StoreContextProvider = ({ children }) => {
 
       if (existingCheckoutId) {
         try {
-          const checkout = await fetchCheckout(
+          const storedCheckout = await fetchCheckout(
             shopifyClient,
             existingCheckoutId
           );
           // Make sure this cart hasn’t already been purchased.
-          if (!checkout.completedAt) {
-            setCheckoutInState(checkout, setStore);
+          if (!storedCheckout.completedAt) {
+            setCheckoutInState(storedCheckout, setStore);
             return;
           }
         } catch (e) {

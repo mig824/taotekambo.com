@@ -7,7 +7,6 @@ module.exports = {
     description: `All about Tao Te Kambo -- Learn about kambo and how you can attend a ceremony.`,
     author: `Miguel Michel`,
     companyInfo: {
-      owner: `Scott Polhill`,
       email: `taotekambo@gmail.com`,
       phone: `+1 (951) 395 4372`,
       homebase: `2081 261st St., Lomita, CA 90717`,

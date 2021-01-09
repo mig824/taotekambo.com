@@ -32,9 +32,7 @@ const ProductWrapper = styled.div`
 
 const Img = styled(BackgroundImg)`
   margin: auto;
-  border-radius: 10px;
   overflow: hidden;
-  justify-self: center;
   width: 100%;
   height: 20rem;
 `;
@@ -44,13 +42,11 @@ const DetailsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%;
   max-width: 1000px;
   width: 100%;
   text-align: center;
   margin: auto;
-  height: 20rem;
-  padding: 1rem;
+  min-height: 20rem;
 
   h3 {
     margin: 1rem 0;
@@ -77,18 +73,23 @@ const DetailsWrapper = styled.div`
 
 const SmallText = styled.small<{ isAvailable: boolean }>`
   color: ${({ isAvailable }) => (isAvailable ? '#66cd00' : '#ee2c2c')};
-  margin-bottom: ${rhythm(0.5)};
+  margin-top: ${rhythm(-0.65)};
+  margin-bottom: ${rhythm(0.1)};
 `;
 
 const AddToCartBtn = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 80%;
   max-width: 12rem;
   min-width: fit-content;
+  padding: 0.5rem;
+  border-radius: 5px;
   font-size: ${rhythm(1)};
   background-color: ${primaryColor};
   color: ${secondaryColor};
   border: none;
-  border-radius: 5px;
   outline: none;
   transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s;
 

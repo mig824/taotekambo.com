@@ -1,9 +1,7 @@
 import React from 'react';
-// import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 
 import SEO from '../components/SEO';
-// import InstaPost from '../components/InstaPost';
 import { tabletPortrait768 } from '../utils/style/breakpoints';
 import { secondaryColor } from '../utils/style/colorscheme';
 import { rhythm } from '../utils/style/typography';
@@ -51,31 +49,9 @@ const SocialPage = () => {
           </a>
         </h1>
       </Header>
-      <ContentContainer>
-        {/* {insta.nodes.map((node) => (
-          <InstaPost post={node} key={node.id} />
-        ))} */}
-      </ContentContainer>
+      <ContentContainer></ContentContainer>
     </>
   );
 };
-
-// export const SocialPageQuery = graphql`
-//   query {
-//     insta: allInstaNode(limit: 18, sort: { fields: timestamp, order: DESC }) {
-//       nodes {
-//         id
-//         caption
-//         image: localFile {
-//           sharp: childImageSharp {
-//             fluid(maxWidth: 200, maxHeight: 200) {
-//               ...GatsbyImageSharpFluid_withWebp
-//             }
-//           }
-//         }
-//       }
-//     }
-//   }
-// `;
 
 export default SocialPage;

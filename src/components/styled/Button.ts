@@ -21,9 +21,11 @@ export const PrimaryBtn = styled.button<PrimaryBtnProps>`
   color: ${secondaryColor};
   padding: 0.2rem 0.65rem;
   margin: ${({ margin }) => (margin ? margin : null)};
-  transition: background-color ease-in-out 300ms, color ease-in-out 300ms;
+  transition: background-color ease-in-out 0.3s, color ease-in-out 0.3s,
+    transform 0.3s ease-in-out;
 
   &:hover {
+    transform: translateY(-5%);
     background-color: ${({ variant }) =>
       variant === 'primary' ? primaryColorHover : null};
     color: ${({ variant }) =>

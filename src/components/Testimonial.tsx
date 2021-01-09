@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FC } from 'react';
 import Img from 'gatsby-image';
 import styled from '@emotion/styled';
 import { tabletPortrait768 } from '../utils/style/breakpoints';
@@ -21,7 +21,7 @@ type TestimonialProps = {
   position: string;
 };
 
-const Testimonial: FunctionComponent<TestimonialProps> = ({
+const Testimonial: FC<TestimonialProps> = ({
   testimonial: { frontmatter, html },
   position,
 }) => {
