@@ -7,6 +7,7 @@ import Map from '../components/Map';
 import { PrimaryBtn } from '../components/styled/Button';
 import { SectionContainer } from '../components/styled/Section';
 import { mobileLandscape480 } from '../utils/style/breakpoints';
+import { rhythm } from '../utils/style/typography';
 
 const ContactContentWrapper = styled.div`
   display: flex;
@@ -14,6 +15,10 @@ const ContactContentWrapper = styled.div`
   max-width: 70em;
   width: 100%;
   margin: auto;
+
+  h1 {
+    font-size: ${rhythm(1.1)};
+  }
 `;
 
 const MapWrapper = styled.div`
@@ -46,11 +51,11 @@ const ContactPage = ({ data: { site } }) => {
         <ContactContentWrapper>
           <div id="text-wrapper">
             <h1>Contact</h1>
-            <h3>Phone</h3>
+            <h2>Phone</h2>
             <p>{phone}</p>
-            <h3>Email</h3>
+            <h2>Email</h2>
             <p>{email}</p>
-            <h3>Homebase</h3>
+            <h2>Homebase</h2>
             <p>{homebase}</p>
             <PrimaryBtn
               margin="2rem 0 0 0"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext, createContext } from 'react';
 import Client from 'shopify-buy';
 
+const STORAGE_KEY = `ttk_checkout_id`;
 const shopifyClient = Client.buildClient({
   domain: `${process.env.SHOPIFY_STORE_NAME}.myshopify.com`,
   storefrontAccessToken: process.env.SHOPIFY_TOKEN,
@@ -21,8 +22,14 @@ const StoreContext = createContext({
 });
 
 const createNewCheckout = (client) => client.checkout.create();
+const fetchCheckout = (client, id) => client.checkout.fetch(id);
 
 const setCheckoutInState = (checkout, setStore) => {
+  const isBrowser = typeof window !== `undefined`;
+  if (isBrowser) {
+    localStorage.setItem(STORAGE_KEY, checkout.id);
+  }
+
   setStore((prevState) => {
     return { ...prevState, checkout };
   });
@@ -33,6 +40,28 @@ const StoreContextProvider = ({ children }) => {
 
   useEffect(() => {
     (async () => {
+      // Check for an existing cart.
+      const isBrowser = typeof window !== `undefined`;
+      const existingCheckoutId = isBrowser
+        ? localStorage.getItem(STORAGE_KEY)
+        : null;
+
+      if (existingCheckoutId) {
+        try {
+          const checkout = await fetchCheckout(
+            shopifyClient,
+            existingCheckoutId
+          );
+          // Make sure this cart hasn’t already been purchased.
+          if (!checkout.completedAt) {
+            setCheckoutInState(checkout, setStore);
+            return;
+          }
+        } catch (e) {
+          localStorage.setItem(STORAGE_KEY, null);
+        }
+      }
+
       const newCheckout = await createNewCheckout(shopifyClient);
       setCheckoutInState(newCheckout, setStore);
     })();

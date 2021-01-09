@@ -134,6 +134,7 @@ const Testimonials = ({ testimonialData }) => {
   return (
     <div css={dynamicCSS}>
       <PrevBtn
+        title="Previous Testimonial"
         onClick={() => {
           if (count <= 0) return;
           setNextSlide(true);
@@ -182,6 +183,7 @@ const Testimonials = ({ testimonialData }) => {
         />
       </SlideContainer>
       <NextBtn
+        title="Next Testimonial"
         onClick={() => {
           if (count > testimonialData.length) return;
           setNextSlide(true);

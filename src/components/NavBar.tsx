@@ -61,7 +61,7 @@ const NavCSS = styled.nav`
       flex-wrap: nowrap;
       align-items: center;
       justify-content: center;
-      padding: 0.2rem 0.5rem;
+      padding: 0.5rem;
       width: 9rem;
     }
 
@@ -225,36 +225,35 @@ const NavBar = () => {
     <NavCSS>
       <LinksDiv>
         <ul>
-          <div
-            id="learn-link"
-            ref={learnLinkRef}
-            onClick={() => toggleOpen(!open)}
-          >
-            <li>Learn</li>
-            <AiOutlineDown id="arrow-icon" />
-          </div>
+          <li>
+            <span
+              id="learn-link"
+              ref={learnLinkRef}
+              onClick={() => toggleOpen(!open)}
+            >
+              Learn
+              <AiOutlineDown id="arrow-icon" />
+            </span>
+          </li>
           {open && (
             <DropDownMenu
               handleClick={() => toggleOpen(!open)}
               learnLinkRef={learnLinkRef}
             />
           )}
-          <Link to="/ceremonies">
-            <li>Ceremonies</li>
-          </Link>
-          {/* <Link to="/social">
-            <li>Social</li>
-          </Link> */}
-          <Link to="/shop">
-            <li>Shop</li>
-          </Link>
-          <Link to="/contact">
-            <li>Contact</li>
-          </Link>
+          <li>
+            <Link to="/ceremonies">Ceremonies</Link>
+          </li>
+          <li>
+            <Link to="/shop">Shop</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
         </ul>
       </LinksDiv>
       <LogoDiv>
-        <Link to="/">
+        <Link to="/" title="Home">
           <Logo />
         </Link>
       </LogoDiv>

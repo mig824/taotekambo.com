@@ -3,7 +3,11 @@ import BackgroundImg from 'gatsby-background-image';
 import styled from '@emotion/styled';
 import { MdAddShoppingCart } from 'react-icons/md';
 
-import { primaryColor, secondaryColor } from '../utils/style/colorscheme';
+import {
+  mainTextColor,
+  primaryColor,
+  secondaryColor,
+} from '../utils/style/colorscheme';
 import { rhythm } from '../utils/style/typography';
 import {
   mobileLandscape480,
@@ -64,6 +68,11 @@ const DetailsWrapper = styled.div`
   select {
     width: 80%;
   }
+
+  label {
+    color: ${mainTextColor};
+    margin-bottom: 0.4rem;
+  }
 `;
 
 const SmallText = styled.small<{ isAvailable: boolean }>`
@@ -110,25 +119,33 @@ const Product = ({
       <DetailsWrapper>
         <h3>{title}</h3>
         {variants.length > 1 && (
-          <select
-            defaultValue={variants[0].title}
-            onChange={(e) => {
-              const variant = variants.find((v) => v.title === e.target.value);
-              setSelectedVariant(variant);
-            }}
-          >
-            {variants.map(({ title, shopifyId, availableForSale }) => {
-              return (
+          <>
+            <label htmlFor={`${title}-select`}>
+              Choose a{' '}
+              {selectedVariant.options.map(({ name }) => name).join('/')}
+            </label>
+            <select
+              id={`${title}-select`}
+              defaultValue={variants[0].title}
+              onChange={(e) => {
+                const variant = variants.find(
+                  (v) => v.title === e.target.value
+                );
+                setSelectedVariant(variant);
+              }}
+            >
+              {variants.map(({ title, shopifyId, availableForSale }) => (
                 <option
+                  label={`${title}`}
                   value={title}
                   disabled={!availableForSale}
                   key={shopifyId}
                 >
                   {title}
                 </option>
-              );
-            })}
-          </select>
+              ))}
+            </select>
+          </>
         )}
         <p className="price">
           {`$${Number(selectedVariant.priceV2.amount).toFixed(2)}`}
@@ -141,6 +158,7 @@ const Product = ({
         <hr />
         <p>{description}</p>
         <AddToCartBtn
+          title="Add To Cart"
           onClick={() => {
             if (selectedVariant.availableForSale) {
               addToCart(selectedVariant.shopifyId, 1);

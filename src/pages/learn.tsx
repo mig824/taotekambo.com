@@ -250,6 +250,7 @@ const LearnPage = ({ data: { image } }) => {
                 <a
                   href="https://psychedelictimes.com/a-guide-to-increasing-fertility-and-taking-kambo-during-pregnancy/"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Kambo & Fertility
                 </a>
@@ -258,12 +259,17 @@ const LearnPage = ({ data: { image } }) => {
                 <a
                   href="https://www.vice.com/en_us/article/gqkxa9/kambo-ceremony-alcoholism-purging-uk"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Kambo & Addiction
                 </a>
               </li>
               <li>
-                <a href="https://psychedelictimes.com/kambo/" target="_blank">
+                <a
+                  href="https://psychedelictimes.com/kambo/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   Kambo Benefits
                 </a>
               </li>
@@ -271,6 +277,7 @@ const LearnPage = ({ data: { image } }) => {
                 <a
                   href="https://www.sciencedaily.com/releases/2011/06/110606181137.htm"
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Fighting Cancer with Kambo
                 </a>

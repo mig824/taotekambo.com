@@ -46,18 +46,11 @@ module.exports = {
         },
       },
     },
-    // {
-    //   resolve: `gatsby-source-instagram`,
-    //   options: {
-    //     username: `3619554129`,
-    //   },
-    // },
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-anchor-links`,
-    // `gatsby-plugin-webpack-bundle-analyser-v2`,
     {
       resolve: `gatsby-plugin-env-variables`,
       options: {

@@ -13,21 +13,6 @@ import {
 import { rhythm } from '../utils/style/typography';
 import { tabletPortrait768 } from '../utils/style/breakpoints';
 
-const MsgWrapper = styled.div<{ show: boolean }>`
-  display: ${({ show }) => (show ? `block` : `none`)};
-  margin-top: 1.4em;
-  text-align: center;
-  transition: display ease-in-out 5s;
-
-  p {
-    margin: 0;
-  }
-`;
-
-const CartMsg = styled.p<{ isAdding: boolean }>`
-  color: ${({ isAdding }) => (isAdding ? `#66cd00` : `#ee2c2c`)};
-`;
-
 const CartButton = styled.button<{ isActive: boolean }>`
   margin: 1em 0 0 0;
   width: 100%;
@@ -102,8 +87,6 @@ type CartProps = {
   variants: any[];
   total: string;
   itemCount: number;
-  isAdding: boolean;
-  isDeleting: boolean;
   removeFromCart: (string) => void;
   updateCart: (string) => void;
   goToCheckout: () => void;
@@ -114,8 +97,6 @@ const Cart: FC<CartProps> = ({
   variants,
   total,
   itemCount,
-  isAdding,
-  isDeleting,
   removeFromCart,
   updateCart,
   goToCheckout,
@@ -141,12 +122,6 @@ const Cart: FC<CartProps> = ({
 
   return (
     <>
-      <MsgWrapper show={isAdding || isDeleting}>
-        {isAdding && <CartMsg isAdding={true}>Item added to cart</CartMsg>}
-        {isDeleting && (
-          <CartMsg isAdding={false}>Item removed from cart</CartMsg>
-        )}
-      </MsgWrapper>
       <CartButton isActive={active} onClick={() => toggleActive(!active)}>
         <MdShoppingCart /> {itemCount}
       </CartButton>

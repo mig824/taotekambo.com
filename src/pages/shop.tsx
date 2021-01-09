@@ -1,10 +1,14 @@
+/** @jsx jsx */
 import React from 'react';
 import { graphql } from 'gatsby';
+import { LineItem } from 'shopify-buy';
 import styled from '@emotion/styled';
+import { jsx, css, keyframes } from '@emotion/react';
 
 import SEO from '../components/SEO';
 import Cart from '../components/Cart';
-import Product from '../components/Product';
+import ShopItem from '../components/Product';
+import ScrollTopArrow from '../components/ScrollTopArrow';
 import {
   useAddItemToCart,
   useCartItemCount,
@@ -16,10 +20,12 @@ import {
   useRemoveItemFromCart,
   useUpdateCart,
 } from '../utils/context/storeContext';
+import { mobileLandscape480 } from '../utils/style/breakpoints';
 import {
-  mobileLandscape480,
-  tabletPortrait768,
-} from '../utils/style/breakpoints';
+  darkAccentColor,
+  mainTextColor,
+  secondaryColor,
+} from '../utils/style/colorscheme';
 
 const CartContainer = styled.div`
   display: flex;
@@ -48,16 +54,43 @@ const ProductsContainer = styled.div<{ productCount: number }>`
   }
 `;
 
+const MsgWrapper = styled.div<{ show: boolean }>`
+  display: ${({ show }) => (show ? `block` : `none`)};
+  position: fixed;
+  bottom: -5%;
+  right: 0;
+  left: 0;
+  z-index: 100;
+  margin: auto;
+  background-color: ${darkAccentColor};
+  color: ${mainTextColor};
+  width: fit-content;
+  text-align: center;
+  border: 1px solid ${secondaryColor};
+`;
+
+const CartMsg = styled.p<{ isAdding?: boolean }>`
+  color: ${({ isAdding }) => (isAdding ? `#66cd00` : `#ee2c2c`)};
+  padding: 1rem 3rem;
+  margin: 0;
+`;
+
+const popup = keyframes`
+  100% {
+    transform: translateY(-100%);
+  }
+`;
+
 const ShopPage = ({ data: { products, variants } }) => {
-  const lineItems = useCartItems();
-  const itemCount = useCartItemCount();
-  const { total } = useCartTotalCost();
+  const lineItems: LineItem[] = useCartItems();
+  const itemCount: number = useCartItemCount();
+  const { total }: { total: string } = useCartTotalCost();
   const isAdding: boolean = useIsAdding();
   const isDeleting: boolean = useIsDeleting();
-  const addItemToCart = useAddItemToCart();
-  const updateCart = useUpdateCart();
-  const removeFromCart = useRemoveItemFromCart();
-  const goToCheckout = useCheckout();
+  const addItemToCart: () => Promise<void> = useAddItemToCart();
+  const updateCart: () => Promise<void> = useUpdateCart();
+  const removeFromCart: () => Promise<void> = useRemoveItemFromCart();
+  const goToCheckout: () => Window = useCheckout();
 
   return (
     <>
@@ -71,8 +104,6 @@ const ShopPage = ({ data: { products, variants } }) => {
           itemsInCart={lineItems}
           total={total}
           itemCount={itemCount}
-          isAdding={isAdding}
-          isDeleting={isDeleting}
           removeFromCart={removeFromCart}
           updateCart={updateCart}
           goToCheckout={goToCheckout}
@@ -80,13 +111,25 @@ const ShopPage = ({ data: { products, variants } }) => {
       </CartContainer>
       <ProductsContainer productCount={products.nodes.length}>
         {products.nodes.map((product) => (
-          <Product
+          <ShopItem
             product={product}
             addToCart={addItemToCart}
             key={product.id}
           />
         ))}
       </ProductsContainer>
+      <MsgWrapper
+        show={isAdding || isDeleting}
+        css={css`
+          animation: ${popup} 0.5s ease forwards;
+        `}
+      >
+        {isAdding && <CartMsg isAdding={true}>Item added to cart</CartMsg>}
+        {isDeleting && (
+          <CartMsg isAdding={false}>Item removed from cart</CartMsg>
+        )}
+      </MsgWrapper>
+      <ScrollTopArrow showBelow={500} />
     </>
   );
 };
@@ -105,6 +148,9 @@ export const query = graphql`
           title
           availableForSale
           quantityAvailable
+          options: selectedOptions {
+            name
+          }
           priceV2 {
             amount
             currencyCode
@@ -128,7 +174,7 @@ export const query = graphql`
         image {
           localFile {
             sharp: childImageSharp {
-              fluid(fit: CONTAIN, maxWidth: 50, maxHeight: 50) {
+              fluid(fit: COVER, maxWidth: 50, maxHeight: 50) {
                 ...GatsbyImageSharpFluid_withWebp
               }
             }
