@@ -158,7 +158,7 @@ const Cart: FC<CartProps> = ({
             ))}
           </>
         ) : (
-          <p id="empty">Your cart is looking pretty empty</p>
+          <p id="empty">Your cart is empty</p>
         )}
         <CheckoutBtnWrapper>
           <button onClick={() => goToCheckout()}>

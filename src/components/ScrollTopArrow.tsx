@@ -26,6 +26,10 @@ const ScrollUpBtn = styled.button<{ showScroll: boolean }>`
     opacity: 1;
   }
 
+  &:focus {
+    outline: none;
+  }
+
   @keyframes fadeIn {
     0% {
       opacity: 0;

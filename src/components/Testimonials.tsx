@@ -126,7 +126,7 @@ const Testimonials = ({ testimonialData }) => {
         align-self: center;
         margin-left: 1.5rem;
         color: ${secondaryColor};
-        font-size: 0.8rem;
+        font-size: 1rem;
       }
     }
   `;

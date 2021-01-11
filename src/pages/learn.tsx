@@ -382,7 +382,7 @@ export const learnPageQuery = graphql`
     ) {
       sharp: childImageSharp {
         fluid(fit: COVER) {
-          src
+          ...GatsbyImageSharpFluid_withWebp
         }
       }
     }

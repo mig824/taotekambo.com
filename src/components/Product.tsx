@@ -41,12 +41,13 @@ const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   max-width: 1000px;
   width: 100%;
   text-align: center;
   margin: auto;
   min-height: 20rem;
+  padding: 0.5rem 0;
 
   h3 {
     margin: 1rem 0;
@@ -160,6 +161,7 @@ const Product = ({
         <p>{description}</p>
         <AddToCartBtn
           title="Add To Cart"
+          disabled={!selectedVariant.availableForSale}
           onClick={() => {
             if (selectedVariant.availableForSale) {
               addToCart(selectedVariant.shopifyId, 1);
