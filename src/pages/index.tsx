@@ -54,7 +54,7 @@ const HomePage = ({ data: { bannerImg, testimonials, site } }) => {
             <p>
               The legend of the Kaxinawá says that deep in the jungle a tribe
               fell ill. The local medicine man named Kampu tried to heal the
-              village with well know plant medicines, though he didn't have any
+              village with well known plant medicines, though he didn't have any
               breakthroughs. Kampu went into the jungle to sit in isolation
               drinking Ayahuasca. This master teacher plant showed him about
               Kambo medicine, it’s healing properties, and how to use it.

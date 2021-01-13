@@ -12,12 +12,35 @@ import { rhythm } from '../utils/style/typography';
 const ContactContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  max-width: 70em;
+  max-width: 70rem;
   width: 100%;
   margin: auto;
 
   h1 {
     font-size: ${rhythm(1.1)};
+    margin-bottom: 3rem;
+  }
+
+  .side-by-side {
+    margin: 1rem auto;
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h2 {
+      margin: 0;
+      padding-right: 0.5rem;
+    }
+
+    p {
+      margin: 0;
+      padding-left: 0.5rem;
+    }
+  }
+
+  #text-wrapper {
+    margin-bottom: 2rem;
   }
 `;
 
@@ -47,16 +70,22 @@ const ContactPage = ({ data: { site } }) => {
         title="Contact"
         description="Who is Tao Te Kambo and how to get in contact"
       />
-      <SectionContainer marginTop="5.2em">
+      <SectionContainer>
         <ContactContentWrapper>
           <div id="text-wrapper">
             <h1>Contact</h1>
-            <h2>Phone</h2>
-            <p>{phone}</p>
-            <h2>Email</h2>
-            <p>{email}</p>
-            <h2>Homebase</h2>
-            <p>{homebase}</p>
+            <div className="side-by-side">
+              <h2>Phone: </h2>
+              <p>{phone}</p>
+            </div>
+            <div className="side-by-side">
+              <h2>Email: </h2>
+              <p>{email}</p>
+            </div>
+            <div className="side-by-side">
+              <h2>Homebase: </h2>
+              <p>{homebase}</p>
+            </div>
             <PrimaryBtn
               margin="2rem 0 0 0"
               variant="primary"

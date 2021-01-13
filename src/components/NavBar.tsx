@@ -24,7 +24,7 @@ const NavCSS = styled.nav`
   padding: 0.5rem 0;
   z-index: 3;
   position: absolute;
-  background-color: ${backgroundColor};
+  background-color: ${darkAccentColor};
 
   a {
     color: ${navLinkColor};
