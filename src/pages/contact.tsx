@@ -6,7 +6,10 @@ import SEO from '../components/SEO';
 import Map from '../components/Map';
 import { PrimaryBtn } from '../components/styled/Button';
 import { SectionContainer } from '../components/styled/Section';
-import { mobileLandscape480 } from '../utils/style/breakpoints';
+import {
+  mobileLandscape480,
+  tabletPortrait768,
+} from '../utils/style/breakpoints';
 import { rhythm } from '../utils/style/typography';
 
 const ContactContentWrapper = styled.div`
@@ -14,7 +17,7 @@ const ContactContentWrapper = styled.div`
   flex-direction: column;
   max-width: 70rem;
   width: 100%;
-  margin: auto;
+  margin: 2rem auto 0 auto;
 
   h1 {
     font-size: ${rhythm(1.1)};
@@ -23,7 +26,7 @@ const ContactContentWrapper = styled.div`
 
   .side-by-side {
     margin: 1rem auto;
-    width: 50%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -36,6 +39,16 @@ const ContactContentWrapper = styled.div`
     p {
       margin: 0;
       padding-left: 0.5rem;
+    }
+
+    ${mobileLandscape480} {
+      width: 60%;
+    }
+
+    ${tabletPortrait768} {
+      h1 {
+        margin: 0 auto;
+      }
     }
   }
 
